@@ -2,7 +2,7 @@
 // Platform.cs
 //  
 // Author:
-//       jurgenobernolte <${AuthorEmail}>
+//       jurgenobernolte <${juergen.obernolte@arcor.de}>
 // 
 // Copyright (c) 2010 jurgenobernolte
 // 
@@ -35,6 +35,9 @@ namespace Pinta
 	{
 		[DllImport("libc")]
 		static extern int uname (IntPtr buf);
+		[DllImport("libdl")]
+		static extern IntPtr dlopen(string filename, int flags);
+		
 		private static bool isWindows;
 		private static bool isMac;
 		private static bool isX11;
@@ -84,6 +87,10 @@ namespace Pinta
 			}
 			return false;
 		}
-		
+	
+		public static IntPtr LoadLibrary(string filename)
+		{
+			return dlopen(filename, 0);
+		}
 	}
 }
