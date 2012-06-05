@@ -25,278 +25,293 @@
 // THE SOFTWARE.
 
 using System;
+using System.Linq;
 using Cairo;
+using Mono.Unix;
+using System.Collections.Generic;
+using Gtk;
 
 namespace Pinta.Core
 {
 	public class WorkspaceManager
 	{
-		private string filename;
-		private bool is_dirty;
-		private Point canvas_size;
+		private int active_document_index = -1;
+		private int new_file_name = 1;
 		
-		public Point ImageSize { get; set; }
-		
-		public Point CanvasSize {
-			get { return canvas_size; }
-			set {
-				if (canvas_size.X != value.X || canvas_size.Y != value.Y) {
-					canvas_size = value;
-					OnCanvasSizeChanged ();
-				}
+		public WorkspaceManager ()
+		{
+			OpenDocuments = new List<Document> ();
+		}
+
+		public int ActiveDocumentIndex {
+			get {
+				return active_document_index;
 			}
+		}
+		
+		public Document ActiveDocument {
+			get {
+				if (HasOpenDocuments)
+					return OpenDocuments[active_document_index];
+				
+				throw new InvalidOperationException ("Tried to get WorkspaceManager.ActiveDocument when there are no open Documents.  Check HasOpenDocuments first.");
+			}
+		}
+
+		public DocumentWorkspace ActiveWorkspace {
+			get {
+				if (HasOpenDocuments)
+					return OpenDocuments[active_document_index].Workspace;
+
+				throw new InvalidOperationException ("Tried to get WorkspaceManager.ActiveWorkspace when there are no open Documents.  Check HasOpenDocuments first.");
+			}
+		}
+
+		public Gdk.Size ImageSize {
+			get { return ActiveDocument.ImageSize; }
+			set { ActiveDocument.ImageSize = value; }
+		}
+
+		public Gdk.Size CanvasSize {
+			get { return ActiveWorkspace.CanvasSize; }
+			set { ActiveWorkspace.CanvasSize = value; }
 		}
 		
 		public PointD Offset {
-			get { return new PointD ((PintaCore.Chrome.DrawingArea.Allocation.Width - CanvasSize.X) / 2, (PintaCore.Chrome.DrawingArea.Allocation.Height - CanvasSize.Y) / 2); }
-		}
-
-		public WorkspaceManager ()
-		{
-			CanvasSize = new Point (800, 600);
-			ImageSize = new Point (800, 600);
+			get { return ActiveWorkspace.Offset; }
 		}
 		
 		public double Scale {
-			get { return (double)CanvasSize.X / (double)ImageSize.X; }
-			set {
-				if (Scale != value) {
-					int new_x = (int)(ImageSize.X * value);
-					int new_y = (int)((new_x * ImageSize.Y) / ImageSize.X);
+			get { return ActiveWorkspace.Scale; }
+			set { ActiveWorkspace.Scale = value; }
+		}
+		
+		public List<Document> OpenDocuments { get; private set; }
+		public bool HasOpenDocuments { get { return OpenDocuments.Count > 0; } }
+		
+		public Document CreateAndActivateDocument (string filename, Gdk.Size size)
+		{
+			Document doc = new Document (size);
+			
+			if (string.IsNullOrEmpty (filename))
+				doc.Filename = string.Format (Catalog.GetString ("Unsaved Image {0}"), new_file_name++);
+			else
+				doc.PathAndFileName = filename;
+			
+			OpenDocuments.Add (doc);
+			OnDocumentCreated (new DocumentEventArgs (doc));
 
-					CanvasSize = new Point (new_x, new_y);
-					Invalidate ();
+			SetActiveDocument (doc);
+			
+			return doc;
+		}
+
+		public void CloseActiveDocument ()
+		{
+			CloseDocument (ActiveDocument);
+		}
+		
+		public void CloseDocument (Document document)
+		{
+			int index = OpenDocuments.IndexOf (document);
+			OpenDocuments.Remove (document);
+			
+			if (index == active_document_index) {
+				// If there's other documents open, switch to one of them
+				if (HasOpenDocuments) {
+					if (index > 0)
+						SetActiveDocument (index - 1);
+					else
+						SetActiveDocument (index);
+				} else {
+					active_document_index = -1;
+					OnActiveDocumentChanged (EventArgs.Empty);
 				}
 			}
+
+			document.Close ();
+			
+			OnDocumentClosed (new DocumentEventArgs (document));
 		}
 		
 		public void Invalidate ()
 		{
-			OnCanvasInvalidated (new CanvasInvalidatedEventArgs ());
+			if (PintaCore.Workspace.HasOpenDocuments)
+				ActiveWorkspace.Invalidate ();
+			else
+				OnCanvasInvalidated (new CanvasInvalidatedEventArgs ());
 		}
-			
+		
 		public void Invalidate (Gdk.Rectangle rect)
 		{
-			rect = new Gdk.Rectangle ((int)((rect.X) * Scale + Offset.X), (int)((rect.Y) * Scale + Offset.Y), (int)(rect.Width * Scale), (int)(rect.Height * Scale));
-			OnCanvasInvalidated (new CanvasInvalidatedEventArgs (rect));
+			ActiveWorkspace.Invalidate (rect);
 		}
-		
-		public void ZoomIn ()
+
+		public Document NewDocument (Gdk.Size imageSize, bool transparent)
 		{
-			double zoom;
+			Document doc = CreateAndActivateDocument (null, imageSize);
+			doc.Workspace.CanvasSize = imageSize;
 
-			if (!double.TryParse (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText.Trim ('%'), out zoom))
-				zoom = Scale * 100;
+			// Start with an empty white layer
+			Layer background = doc.AddNewLayer (Catalog.GetString ("Background"));
 
-			zoom = Math.Min (zoom, 3600);
-
-			int i = 0;
-
-			foreach (object item in (PintaCore.Actions.View.ZoomComboBox.ComboBox.Model as Gtk.ListStore)) {
-				if (((object[])item)[0].ToString () == "Window" || int.Parse (((object[])item)[0].ToString ().Trim ('%')) <= zoom) {
-					PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i - 1;
-					return;
+			if (!transparent) {
+				using (Cairo.Context g = new Cairo.Context (background.Surface)) {
+					g.SetSourceRGB (1, 1, 1);
+					g.Paint ();
 				}
-				
-				i++;
 			}
+
+			doc.Workspace.History.PushNewItem (new BaseHistoryItem (Stock.New, Catalog.GetString ("New Image")));
+			doc.IsDirty = false;
+
+			PintaCore.Actions.View.ZoomToWindow.Activate ();
+
+			return doc;
 		}
-		
-		public void ZoomOut ()
+
+		// TODO: Standardize add to recent files
+		public bool OpenFile (string file)
 		{
-			double zoom;
-			
-			if (!double.TryParse (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText.Trim ('%'), out zoom))
-				zoom = Scale * 100;
-				
-			zoom = Math.Min (zoom, 3600);
-			
-			int i = 0;
+			bool fileOpened = false;
 
-			foreach (object item in (PintaCore.Actions.View.ZoomComboBox.ComboBox.Model as Gtk.ListStore)) {
-				if (((object[])item)[0].ToString () == "Window")
-					return;
+			try {
+				// Open the image and add it to the layers
+				IImageImporter importer = PintaCore.System.ImageFormats.GetImporterByFile (file);
+				importer.Import (file);
 
-				if (int.Parse (((object[])item)[0].ToString ().Trim ('%')) < zoom) {
-					PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i;
-					return;
-				}
+				PintaCore.Workspace.ActiveDocument.PathAndFileName = file;
+				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Stock.Open, Catalog.GetString ("Open Image")));
+				PintaCore.Workspace.ActiveDocument.IsDirty = false;
+				PintaCore.Workspace.ActiveDocument.HasFile = true;
+				PintaCore.Actions.View.ZoomToWindow.Activate ();
+				PintaCore.Workspace.Invalidate ();
 
-				i++;
+				fileOpened = true;
+			} catch {
+				MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Catalog.GetString ("Could not open file: {0}"), file);
+				md.Title = Catalog.GetString ("Error");
+
+				md.Run ();
+				md.Destroy ();
 			}
-		}
 
-		public void ZoomToRectangle (Rectangle rect)
-		{
-			double ratio;
-			
-			if (canvas_size.X / rect.Width <= canvas_size.Y / rect.Height)
-				ratio = canvas_size.X / rect.Width;
-			else
-				ratio = canvas_size.Y / rect.Height;
-			
-			(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = String.Format("{0:F}%", ratio * 100.0);
-			RecenterView (rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
-		}
-		
-		public void RecenterView (double x, double y)
-		{
-			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
-
-			view.Hadjustment.Value = Utility.Clamp (x * Scale - PintaCore.Chrome.DrawingArea.Allocation.Width / (2 *Scale) , view.Hadjustment.Lower, view.Hadjustment.Upper);
-			view.Vadjustment.Value = Utility.Clamp (y * Scale - PintaCore.Chrome.DrawingArea.Allocation.Height / (2 *Scale) , view.Vadjustment.Lower, view.Vadjustment.Upper);
+			return fileOpened;
 		}
 		
 		public void ResizeImage (int width, int height)
 		{
-			if (ImageSize.X == width && ImageSize.Y == height)
-				return;
-				
-			PintaCore.Layers.FinishSelection ();
-			
-			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize.X, ImageSize.Y);
-			hist.TakeSnapshotOfImage ();
-			
-			ImageSize = new Point (width, height);
-			CanvasSize = new Point (width, height);
-			
-			foreach (var layer in PintaCore.Layers)
-				layer.Resize (width, height);
-			
-			PintaCore.History.PushNewItem (hist);
-			
-			PintaCore.Layers.ResetSelectionPath ();
-			PintaCore.Workspace.Invalidate ();
+			ActiveDocument.ResizeImage (width, height);
 		}
 		
 		public void ResizeCanvas (int width, int height, Anchor anchor)
 		{
-			if (ImageSize.X == width && ImageSize.Y == height)
-				return;
-
-			PintaCore.Layers.FinishSelection ();
-
-			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize.X, ImageSize.Y);
-			hist.Icon = "Menu.Image.CanvasSize.png";
-			hist.Text = "Resize Canvas";
-			hist.TakeSnapshotOfImage ();
-
-			ImageSize = new Point (width, height);
-			CanvasSize = new Point (width, height);
-
-			foreach (var layer in PintaCore.Layers)
-				layer.ResizeCanvas (width, height, anchor);
-
-			PintaCore.History.PushNewItem (hist);
-
-			PintaCore.Layers.ResetSelectionPath ();
-			PintaCore.Workspace.Invalidate ();
+			ActiveDocument.ResizeCanvas (width, height, anchor);
 		}
 		
 		public Cairo.PointD WindowPointToCanvas (double x, double y)
 		{
-			return new Cairo.PointD ((x - Offset.X) / PintaCore.Workspace.Scale, (y - Offset.Y) / PintaCore.Workspace.Scale);
-		}
-
-		public bool PointInCanvas (Cairo.PointD point)
-		{
-			if (point.X < 0 || point.Y < 0)
-				return false;
-
-			if (point.X >= PintaCore.Workspace.ImageSize.X || point.Y >= PintaCore.Workspace.ImageSize.Y)
-				return false;
-
-			return true;
+			return ActiveWorkspace.WindowPointToCanvas (x, y);
 		}
 
 		public Gdk.Rectangle ClampToImageSize (Gdk.Rectangle r)
 		{
-			int x = Utility.Clamp (r.X, 0, ImageSize.X);
-			int y = Utility.Clamp (r.Y, 0, ImageSize.Y);
-			int width = Math.Min (r.Width, ImageSize.X - x);
-			int height = Math.Min (r.Height, ImageSize.Y - y);
-
-			return new Gdk.Rectangle (x, y, width, height);
-		}
-		
-		public string Filename {
-			get { return filename; }
-			set {
-				if (filename != value) {
-					filename = value;
-					ResetTitle ();
-				}
-			}
-		}
-		
-		public bool IsDirty {
-			get { return is_dirty; }
-			set {
-				if (is_dirty != value) {
-					is_dirty = value;
-					ResetTitle ();
-				}
-			}
-		}
-		
-		public bool CanvasFitsInWindow {
-			get {
-				Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
-
-				int window_x = view.Allocation.Width;
-				int window_y = view.Children[0].Allocation.Height;
-
-				if (CanvasSize.X <= window_x && CanvasSize.Y <= window_y)
-					return true;
-
-				return false;
-			}
+			return ActiveDocument.ClampToImageSize (r);
 		}
 
 		public bool ImageFitsInWindow {
-			get {
-				Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
-
-				int window_x = view.Allocation.Width;
-				int window_y = view.Children[0].Allocation.Height;
-
-				if (ImageSize.X <= window_x && ImageSize.Y <= window_y)
-					return true;
-
-				return false;
-			}
+			get { return ActiveWorkspace.ImageFitsInWindow; }
 		}
 		
-		public void ScrollCanvas (int dx, int dy)
+		internal void ResetTitle ()
 		{
-			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
+			if (HasOpenDocuments)
+				PintaCore.Chrome.MainWindow.Title = string.Format ("{0}{1} - Pinta", ActiveDocument.Filename, ActiveDocument.IsDirty ? "*" : "");
+			else
+				PintaCore.Chrome.MainWindow.Title = "Pinta";
+		}
 
-			view.Hadjustment.Value = Utility.Clamp (dx + view.Hadjustment.Value, view.Hadjustment.Lower, view.Hadjustment.Upper - view.Hadjustment.PageSize);
-			view.Vadjustment.Value = Utility.Clamp (dy + view.Vadjustment.Value, view.Vadjustment.Lower, view.Vadjustment.Upper - view.Vadjustment.PageSize);
+		public void SetActiveDocument (int index)
+		{
+			if (index >= OpenDocuments.Count)
+				throw new ArgumentOutOfRangeException ("Tried to WorkspaceManager.SetActiveDocument greater than OpenDocuments.");
+			if (index < 0)
+				throw new ArgumentOutOfRangeException ("Tried to WorkspaceManager.SetActiveDocument less that zero.");
+			
+			SetActiveDocument (OpenDocuments[index]);
 		}
 		
-		private void ResetTitle ()
+		public void SetActiveDocument (Document document)
 		{
-			PintaCore.Chrome.MainWindow.Title = string.Format ("{0}{1} - Pinta", filename, is_dirty ? "*" : "");
+			RadioAction action = PintaCore.Actions.Window.OpenWindows.Where (p => p.Name == document.Guid.ToString ()).FirstOrDefault ();
+
+			if (action == null)
+				throw new ArgumentOutOfRangeException ("Tried to WorkspaceManager.SetActiveDocument.  Could not find document.");
+
+			action.Activate ();
 		}
 
+		internal void SetActiveDocumentInternal (Document document)
+		{
+			// Work around a case where we closed a document but haven't updated
+			// the active_document_index yet and it points to the closed document
+			if (HasOpenDocuments && active_document_index != -1 && OpenDocuments.Count > active_document_index)
+				PintaCore.Tools.Commit ();
+
+			int index = OpenDocuments.IndexOf (document);
+			active_document_index = index;
+
+			OnActiveDocumentChanged (EventArgs.Empty);
+		}
+		
 		#region Protected Methods
-		protected void OnCanvasInvalidated (CanvasInvalidatedEventArgs e)
+		protected void OnActiveDocumentChanged (EventArgs e)
+		{
+			if (ActiveDocumentChanged != null)
+				ActiveDocumentChanged (this, EventArgs.Empty);
+				
+			ResetTitle ();
+		}
+		
+		protected internal void OnCanvasInvalidated (CanvasInvalidatedEventArgs e)
 		{
 			if (CanvasInvalidated != null)
 				CanvasInvalidated (this, e);
 		}
 
-		protected void OnCanvasSizeChanged ()
+		public void OnCanvasSizeChanged ()
 		{
 			if (CanvasSizeChanged != null)
 				CanvasSizeChanged (this, EventArgs.Empty);
 		}
+
+		protected internal void OnDocumentCreated (DocumentEventArgs e)
+		{
+			if (DocumentCreated != null)
+				DocumentCreated (this, e);
+		}
+
+		protected internal void OnDocumentOpened (DocumentEventArgs e)
+		{
+			if (DocumentOpened != null)
+				DocumentOpened (this, e);
+		}
+
+		protected internal void OnDocumentClosed (DocumentEventArgs e)
+		{
+			if (DocumentClosed != null)
+				DocumentClosed (this, e);
+		}
 		#endregion
 
 		#region Public Events
+		public event EventHandler ActiveDocumentChanged;
 		public event EventHandler<CanvasInvalidatedEventArgs> CanvasInvalidated;
 		public event EventHandler CanvasSizeChanged;
+		public event EventHandler<DocumentEventArgs> DocumentCreated;
+		public event EventHandler<DocumentEventArgs> DocumentOpened;
+		public event EventHandler<DocumentEventArgs> DocumentClosed;
 		#endregion
+		
 	}
 }

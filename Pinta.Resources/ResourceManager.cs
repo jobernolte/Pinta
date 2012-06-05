@@ -1,5 +1,5 @@
 // 
-// ResourceManager.cs
+// ResourceLoader.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -29,15 +29,49 @@ using Gdk;
 
 namespace Pinta.Resources
 {
-	public class ResourceManager
+	public static class ResourceLoader
 	{
-		public ResourceManager ()
+		public static Pixbuf GetIcon (string name, int size)
 		{
+			try {
+				// First see if it's a built-in gtk icon, like gtk-new
+				if (Gtk.IconTheme.Default.HasIcon (name))
+					return Gtk.IconTheme.Default.LoadIcon (name, size, Gtk.IconLookupFlags.UseBuiltin);
+
+				// Otherwise, get it from our embedded resources.
+				return Gdk.Pixbuf.LoadFromResource (name);
+			}
+			catch (Exception ex) {
+				// Ensure that we don't crash if an icon is missing for some reason.
+				System.Console.Error.WriteLine (ex.Message);
+
+				// Try to return gtk's default missing image
+				if (name != Gtk.Stock.MissingImage)
+					return GetIcon (Gtk.Stock.MissingImage, size);
+
+				// If gtk is missing it's "missing image", we'll create one on the fly
+				return CreateMissingImage (size);
+			}
 		}
-		
-		public Pixbuf GetIcon (string name)
+
+		// From MonoDevelop:
+		// https://github.com/mono/monodevelop/blob/master/main/src/core/MonoDevelop.Ide/gtk-gui/generated.cs
+		private static Pixbuf CreateMissingImage (int size)
 		{
-			return Gdk.Pixbuf.LoadFromResource (name);
+			var pmap = new Gdk.Pixmap (Gdk.Screen.Default.RootWindow, size, size);
+			var gc = new Gdk.GC (pmap);
+
+			gc.RgbFgColor = new Gdk.Color (255, 255, 255);
+			pmap.DrawRectangle (gc, true, 0, 0, size, size);
+			gc.RgbFgColor = new Gdk.Color (0, 0, 0);
+			pmap.DrawRectangle (gc, false, 0, 0, (size - 1), (size - 1));
+
+			gc.SetLineAttributes (3, Gdk.LineStyle.Solid, Gdk.CapStyle.Round, Gdk.JoinStyle.Round);
+			gc.RgbFgColor = new Gdk.Color (255, 0, 0);
+			pmap.DrawLine (gc, (size / 4), (size / 4), ((size - 1) - (size / 4)), ((size - 1) - (size / 4)));
+			pmap.DrawLine (gc, ((size - 1) - (size / 4)), (size / 4), (size / 4), ((size - 1) - (size / 4)));
+
+			return Gdk.Pixbuf.FromDrawable (pmap, pmap.Colormap, 0, 0, 0, 0, size, size);
 		}
 	}
 }

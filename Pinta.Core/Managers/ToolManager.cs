@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Gtk;
 
 namespace Pinta.Core
@@ -37,6 +38,9 @@ namespace Pinta.Core
 		
 		private List<BaseTool> Tools;
 
+		public event EventHandler<ToolEventArgs> ToolAdded;
+		public event EventHandler<ToolEventArgs> ToolRemoved;
+
 		public ToolManager ()
 		{
 			Tools = new List<BaseTool> ();
@@ -47,7 +51,31 @@ namespace Pinta.Core
 			tool.ToolItem.Clicked += HandlePbToolItemClicked;
 			tool.ToolItem.Sensitive = tool.Enabled;
 			
-			Tools.Add (tool);	
+			Tools.Add (tool);
+			Tools.Sort (new ToolSorter ());
+
+			OnToolAdded (tool);
+
+			if (CurrentTool == null)
+				SetCurrentTool (tool);
+		}
+
+		public void RemoveInstanceOfTool (System.Type tool_type)
+		{
+			foreach (BaseTool tool in Tools) {
+				if (tool.GetType () == tool_type) {
+					tool.ToolItem.Clicked -= HandlePbToolItemClicked;
+					tool.ToolItem.Active = false;
+					tool.ToolItem.Sensitive = false;
+
+					Tools.Remove (tool);
+					Tools.Sort (new ToolSorter ());
+
+					SetCurrentTool (new DummyTool ());
+					OnToolRemoved (tool);
+					return;
+				}
+			}
 		}
 		
 		void HandlePbToolItemClicked (object sender, EventArgs e)
@@ -55,11 +83,12 @@ namespace Pinta.Core
 			ToggleToolButton tb = (ToggleToolButton)sender;
 
 			BaseTool t = FindTool (tb.Label);
-		
+
 			// Don't let the user unselect the current tool	
-			if (t.Name == CurrentTool.Name) {
-				//tb.Active = true;
-				//return;
+			if (CurrentTool != null && t.Name == CurrentTool.Name) {
+				if (prev_index != index)
+					tb.Active = true;
+				return;
 			}
 
 			SetCurrentTool (t);
@@ -79,11 +108,24 @@ namespace Pinta.Core
 		}
 		
 		public BaseTool CurrentTool {
-			get { return Tools[index]; }
+			get { if (index >= 0) {
+					return Tools[index];}
+				else {
+					DummyTool dummy = new DummyTool ();
+					SetCurrentTool (dummy);
+					return dummy;
+				}
+			}
 		}
 		
 		public BaseTool PreviousTool {
 			get { return Tools[prev_index]; }
+		}
+
+		public void Commit ()
+		{
+			if (CurrentTool != null)
+				CurrentTool.DoCommit ();
 		}
 
 		public void SetCurrentTool (BaseTool tool)
@@ -92,13 +134,13 @@ namespace Pinta.Core
 			
 			if (index == i)
 				return;
-			
+
 			// Unload previous tool if needed
 			if (index >= 0) {
+				prev_index = index;
 				Tools[index].DoClearToolBar (PintaCore.Chrome.ToolToolBar);
 				Tools[index].DoDeactivated ();
 				Tools[index].ToolItem.Active = false;
-				prev_index = index;
 			}
 			
 			// Load new tool
@@ -111,14 +153,57 @@ namespace Pinta.Core
 			PintaCore.Chrome.SetStatusBarText (string.Format (" {0}: {1}", tool.Name, tool.StatusBarText));
 		}
 
-		public void SetCurrentTool (string tool)
+		public bool SetCurrentTool (string tool)
 		{
 			BaseTool t = FindTool (tool);
 			
-			if (t != null)
+			if (t != null) {
 				SetCurrentTool (t);
+				return true;
+			}
+			
+			return false;
 		}
 		
+		public void SetCurrentTool (Gdk.Key shortcut)
+		{
+			BaseTool tool = FindNextTool (shortcut);
+			
+			if (tool != null)
+				SetCurrentTool (tool);
+		}
+		
+		private BaseTool FindNextTool (Gdk.Key shortcut)
+		{
+			string key = shortcut.ToString ().ToUpperInvariant ();
+			
+			// Begin looking at the tool after the current one
+			for (int i = index + 1; i < Tools.Count; i++) {
+				if (Tools[i].ShortcutKey.ToString ().ToUpperInvariant () == key)
+					return Tools[i];
+			}
+				
+			// Begin at the beginning and look up to the current tool
+			for (int i = 0; i < index; i++) {
+				if (Tools[i].ShortcutKey.ToString ().ToUpperInvariant () == key)
+					return Tools[i];
+			}
+			
+			return null;
+		}
+		
+		private void OnToolAdded (BaseTool tool)
+		{
+			if (ToolAdded != null)
+				ToolAdded (this, new ToolEventArgs (tool));
+		}
+
+		private void OnToolRemoved (BaseTool tool)
+		{
+			if (ToolRemoved != null)
+				ToolRemoved (this, new ToolEventArgs (tool));
+		}
+
 		#region IEnumerable<BaseTool> implementation
 		public IEnumerator<BaseTool> GetEnumerator ()
 		{
@@ -132,5 +217,29 @@ namespace Pinta.Core
 			return Tools.GetEnumerator ();
 		}
 		#endregion
+
+		class ToolSorter : Comparer<BaseTool>
+		{
+			public override int Compare (BaseTool x, BaseTool y)
+			{
+				return x.Priority - y.Priority;
+			}
+		}
+	}
+
+	//This tool does nothing, is used when no tools are in toolbox. If used seriously will probably
+	// throw a zillion exceptions due to missing overrides
+	public class DummyTool : BaseTool
+	{
+		public override string Name { get { return Mono.Unix.Catalog.GetString ("No tool selected."); } }
+		public override string Icon { get { return Gtk.Stock.MissingImage; } }
+		public override string StatusBarText { get { return Mono.Unix.Catalog.GetString ("No tool selected."); } }
+
+		protected override void OnBuildToolBar (Toolbar tb)
+		{
+			tool_label = null;
+			tool_image = null;
+			tool_sep = null;
+		}
 	}
 }

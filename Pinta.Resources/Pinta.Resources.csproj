@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -9,7 +9,26 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Pinta.Resources</RootNamespace>
     <AssemblyName>Pinta.Resources</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <CodePage>65001</CodePage>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +39,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -28,15 +48,18 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="System" />
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ResourceManager.cs" />
-    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Tools.CloneStamp.png">
@@ -57,8 +80,41 @@
     <EmbeddedResource Include="Resources\Tools.Text.png">
       <LogicalName>Tools.Text.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.ColorPicker.png">
+      <LogicalName>Cursor.ColorPicker.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.Text.png">
+      <LogicalName>Cursor.Text.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.Pencil.png">
+      <LogicalName>Cursor.Pencil.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.Line.png">
+      <LogicalName>Cursor.Line.png</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Tools.LassoSelect.png">
       <LogicalName>Tools.LassoSelect.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.LassoSelect.png">
+      <LogicalName>Cursor.LassoSelect.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.Rectangle.png">
+      <LogicalName>Cursor.Rectangle.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.RoundedRectangle.png">
+      <LogicalName>Cursor.RoundedRectangle.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.FreeformShape.png">
+      <LogicalName>Cursor.FreeformShape.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.CloneStamp.png">
+      <LogicalName>Cursor.CloneStamp.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.CloneStampSetSource.png">
+      <LogicalName>Cursor.CloneStampSetSource.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.Recolor.png">
+      <LogicalName>Cursor.Recolor.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Tools.MagicWand.png">
       <LogicalName>Tools.MagicWand.png</LogicalName>
@@ -71,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Tools.PaintBucket.png">
       <LogicalName>Tools.PaintBucket.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.PaintBucket.png">
+      <LogicalName>Cursor.PaintBucket.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Tools.Pan.png">
       <LogicalName>Tools.Pan.png</LogicalName>
@@ -283,11 +342,224 @@
     <EmbeddedResource Include="Resources\Menu.Adjustments.Posterize.png">
       <LogicalName>Menu.Adjustments.Posterize.png</LogicalName>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
+    <EmbeddedResource Include="Resources\Toolbar.Bold.png">
+      <LogicalName>Toolbar.Bold.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.CenterAlignment.png">
+      <LogicalName>Toolbar.CenterAlignment.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.Italic.png">
+      <LogicalName>Toolbar.Italic.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.LeftAlignment.png">
+      <LogicalName>Toolbar.LeftAlignment.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.RightAlignment.png">
+      <LogicalName>Toolbar.RightAlignment.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.Underline.png">
+      <LogicalName>Toolbar.Underline.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Artistic.InkSketch.png">
+      <LogicalName>Menu.Effects.Artistic.InkSketch.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Artistic.OilPainting.png">
+      <LogicalName>Menu.Effects.Artistic.OilPainting.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Artistic.PencilSketch.png">
+      <LogicalName>Menu.Effects.Artistic.PencilSketch.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.Fragment.png">
+      <LogicalName>Menu.Effects.Blurs.Fragment.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.GaussianBlur.png">
+      <LogicalName>Menu.Effects.Blurs.GaussianBlur.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.MotionBlur.png">
+      <LogicalName>Menu.Effects.Blurs.MotionBlur.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.RadialBlur.png">
+      <LogicalName>Menu.Effects.Blurs.RadialBlur.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.SurfaceBlur.png">
+      <LogicalName>Menu.Effects.Blurs.SurfaceBlur.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.Unfocus.png">
+      <LogicalName>Menu.Effects.Blurs.Unfocus.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.ZoomBlur.png">
+      <LogicalName>Menu.Effects.Blurs.ZoomBlur.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Photo.Glow.png">
+      <LogicalName>Menu.Effects.Photo.Glow.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Photo.RedEyeRemove.png">
+      <LogicalName>Menu.Effects.Photo.RedEyeRemove.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Photo.Sharpen.png">
+      <LogicalName>Menu.Effects.Photo.Sharpen.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Photo.SoftenPortrait.png">
+      <LogicalName>Menu.Effects.Photo.SoftenPortrait.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Stylize.EdgeDetect.png">
+      <LogicalName>Menu.Effects.Stylize.EdgeDetect.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Render.Clouds.png">
+      <LogicalName>Menu.Effects.Render.Clouds.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Render.JuliaFractal.png">
+      <LogicalName>Menu.Effects.Render.JuliaFractal.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Render.MandelbrotFractal.png">
+      <LogicalName>Menu.Effects.Render.MandelbrotFractal.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Distort.Bulge.png">
+      <LogicalName>Menu.Effects.Distort.Bulge.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Noise.Median.png">
+      <LogicalName>Menu.Effects.Noise.Median.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Noise.ReduceNoise.png">
+      <LogicalName>Menu.Effects.Noise.ReduceNoise.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Noise.AddNoise.png">
+      <LogicalName>Menu.Effects.Noise.AddNoise.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Stylize.Outline.png">
+      <LogicalName>Menu.Effects.Stylize.Outline.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Distort.Dents.png">
+      <LogicalName>Menu.Effects.Distort.Dents.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Distort.PolarInversion.png">
+      <LogicalName>Menu.Effects.Distort.PolarInversion.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Distort.Twist.png">
+      <LogicalName>Menu.Effects.Distort.Twist.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Distort.Tile.png">
+      <LogicalName>Menu.Effects.Distort.Tile.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Distort.Pixelate.png">
+      <LogicalName>Menu.Effects.Distort.Pixelate.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Distort.FrostedGlass.png">
+      <LogicalName>Menu.Effects.Distort.FrostedGlass.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Stylize.Relief.png">
+      <LogicalName>Menu.Effects.Stylize.Relief.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Stylize.Emboss.png">
+      <LogicalName>Menu.Effects.Stylize.Emboss.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.ConicalGradient.png">
+      <LogicalName>Toolbar.ConicalGradient.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.DiamondGradient.png">
+      <LogicalName>Toolbar.DiamondGradient.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.LinearGradient.png">
+      <LogicalName>Toolbar.LinearGradient.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.LinearReflectedGradient.png">
+      <LogicalName>Toolbar.LinearReflectedGradient.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.RadialGradient.png">
+      <LogicalName>Toolbar.RadialGradient.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.AntiAliasingDisabledIcon.png">
+      <LogicalName>Toolbar.AntiAliasingDisabledIcon.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.AntiAliasingEnabledIcon.png">
+      <LogicalName>Toolbar.AntiAliasingEnabledIcon.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.BlendingEnabledIcon.png">
+      <LogicalName>Toolbar.BlendingEnabledIcon.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.BlendingOverwriteIcon.png">
+      <LogicalName>Toolbar.BlendingOverwriteIcon.png</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\ShapeTool.OutlineFill.png">
       <LogicalName>ShapeTool.OutlineFill.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\About.Image.png">
+      <LogicalName>About.Image.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\About.ImageSep.png">
+      <LogicalName>About.ImageSep.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\About.MonoPowered.png">
+      <LogicalName>About.MonoPowered.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\About.ImageTop.png">
+      <LogicalName>About.ImageTop.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Help.Translate.png">
+      <LogicalName>Menu.Help.Translate.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.ColorMode.png">
+      <LogicalName>Toolbar.ColorMode.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.TransparentMode.png">
+      <LogicalName>Toolbar.TransparentMode.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ShapeTool.Fill.png">
+      <LogicalName>ShapeTool.Fill.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ShapeTool.Outline.png">
+      <LogicalName>ShapeTool.Outline.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Default.png">
+      <LogicalName>Menu.Effects.Default.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Pinta-16.png">
+      <LogicalName>Pinta-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Pinta-32.png">
+      <LogicalName>Pinta-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Edit.Addins.png">
+      <LogicalName>Menu.Edit.Addins.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\TextTool.FillBackground.png">
+      <LogicalName>TextTool.FillBackground.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.Sampling.1x1.png">
+      <LogicalName>Toolbar.Sampling.1x1.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.Sampling.3x3.png">
+      <LogicalName>Toolbar.Sampling.3x3.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.Sampling.5x5.png">
+      <LogicalName>Toolbar.Sampling.5x5.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.Sampling.7x7.png">
+      <LogicalName>Toolbar.Sampling.7x7.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.Sampling.9x9.png">
+      <LogicalName>Toolbar.Sampling.9x9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.ColorPicker.PreviousTool.png">
+      <LogicalName>Tools.ColorPicker.PreviousTool.png</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

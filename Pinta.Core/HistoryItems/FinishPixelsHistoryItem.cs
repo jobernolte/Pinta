@@ -26,6 +26,7 @@
 
 using System;
 using Cairo;
+using Mono.Unix;
 
 namespace Pinta.Core
 {
@@ -35,9 +36,11 @@ namespace Pinta.Core
 		private PointD old_offset;
 		private ImageSurface old_surface;
 
+		public override bool CausesDirty { get { return false; } }
+		
 		public FinishPixelsHistoryItem ()
 		{
-			Text = "Finish Pixels";
+			Text = Catalog.GetString ("Finish Pixels");
 			Icon = "Tools.Move.png";
 		}
 
@@ -58,7 +61,7 @@ namespace Pinta.Core
 			old_selection_layer = swap_sel;
 
 			PintaCore.Workspace.Invalidate ();
-			PintaCore.Tools.SetCurrentTool ("Move Selected Pixels");
+			PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Move Selected Pixels"));
 		}
 
 		public override void Redo ()

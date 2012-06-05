@@ -33,6 +33,7 @@ namespace Pinta.Core
 	{
 		private Color primary;
 		private Color secondary;
+		private Palette palette;
 
 		public Color PrimaryColor {
 			get { return primary; }
@@ -54,10 +55,20 @@ namespace Pinta.Core
 			}
 		}
 		
+		public Palette CurrentPalette {
+			get {
+				if (palette == null) {
+					palette = Palette.GetDefault ();
+				}
+				
+				return palette;
+			}
+		}
+		
 		public PaletteManager ()
 		{
-			PrimaryColor = new Color (1, 0, 0);
-			SecondaryColor = new Color (0, 0, 1);
+			PrimaryColor = new Color (0, 0, 0);
+			SecondaryColor = new Color (1, 1, 1);
 		}
 
 		#region Protected Methods

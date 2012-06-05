@@ -28,6 +28,7 @@ using System;
 using System.ComponentModel;
 using System.Collections.Specialized;
 using Cairo;
+using Gdk;
 
 namespace Pinta.Core
 {
@@ -36,9 +37,8 @@ namespace Pinta.Core
 		private double opacity;
 		private bool hidden;
 		private string name;
-		private bool tiled;
-		private PointD offset;
-		
+		private BlendMode blend_mode;
+
 		public Layer () : this (null)
 		{
 		}
@@ -55,6 +55,7 @@ namespace Pinta.Core
 			this.hidden = hidden;
 			this.opacity = opacity;
 			this.name = name;			
+			this.blend_mode = BlendMode.Normal;
 		}
 		
 		public ImageSurface Surface { get; set; }
@@ -64,7 +65,8 @@ namespace Pinta.Core
 		public static readonly string OpacityProperty = "Opacity";
 		public static readonly string HiddenProperty = "Hidden";
 		public static readonly string NameProperty = "Name";		
-		
+		public static readonly string BlendModeProperty = "BlendMode";
+
 		public double Opacity {
 			get { return opacity; }
 			set { if (opacity != value) SetValue (OpacityProperty, ref opacity, value); }
@@ -80,12 +82,14 @@ namespace Pinta.Core
 			set { if (name != value) SetValue (NameProperty, ref name, value); }
 		}				
 			
+		public BlendMode BlendMode {
+			get { return blend_mode; }
+			set { if (blend_mode != value) SetValue (BlendModeProperty, ref blend_mode, value); }
+		}				
+		
 		public void Clear ()
 		{
-			using (Context g = new Context (Surface)) {
-				g.Operator = Operator.Clear;
-				g.Paint ();
-			}
+			Surface.Clear ();
 		}
 		
 		public void FlipHorizontal ()
@@ -120,14 +124,30 @@ namespace Pinta.Core
 			(old as IDisposable).Dispose ();
 		}
 		
-		public void Rotate180 ()
+		/// <summary>
+		/// Rotates layer by the specified angle (in degrees).
+		/// </summary>
+		/// <param name='angle'>
+		/// Angle (in degrees).
+		/// </param>
+		public void Rotate (double angle)
 		{
-			Layer dest = PintaCore.Layers.CreateLayer ();
-			
+			int w = PintaCore.Workspace.ImageSize.Width;
+			int h = PintaCore.Workspace.ImageSize.Height;
+
+			double radians = (angle / 180d) * Math.PI;
+			double cos = Math.Cos (radians);
+			double sin = Math.Sin (radians);
+
+			var newSize = RotateDimensions (PintaCore.Workspace.ImageSize, angle);
+
+			Layer dest = PintaCore.Layers.CreateLayer (string.Empty, newSize.Width, newSize.Height);
+
 			using (Cairo.Context g = new Cairo.Context (dest.Surface)) {
-				g.Matrix = new Matrix (-1, 0, 0, -1, Surface.Width, Surface.Height);
+				g.Matrix = new Matrix (cos, sin, -sin, cos, newSize.Width / 2.0, newSize.Height / 2.0);
+				g.Translate (-w / 2.0, -h / 2.0);
 				g.SetSource (Surface);
-				
+
 				g.Paint ();
 			}
 			
@@ -135,47 +155,16 @@ namespace Pinta.Core
 			Surface = dest.Surface;
 			(old as IDisposable).Dispose ();
 		}
-		
-		public void Rotate90CW ()
+
+		public static Gdk.Size RotateDimensions (Gdk.Size originalSize, double angle)
 		{
-			int w = PintaCore.Workspace.ImageSize.X;
-			int h = PintaCore.Workspace.ImageSize.Y;
-			
-			Layer dest = PintaCore.Layers.CreateLayer (string.Empty, h, w);
-			
-			using (Cairo.Context g = new Cairo.Context (dest.Surface)) {
-				g.Translate (h / 2d, w / 2d);
-				g.Rotate (Math.PI / 2);
-				g.Translate (-w / 2d, -h / 2d);
-				g.SetSource (Surface);
-				
-				g.Paint ();
-			}
-			
-			Surface old = Surface;
-			Surface = dest.Surface;
-			(old as IDisposable).Dispose ();
-		}
-		
-		public void Rotate90CCW ()
-		{
-			int w = PintaCore.Workspace.ImageSize.X;
-			int h = PintaCore.Workspace.ImageSize.Y;
-			
-			Layer dest = PintaCore.Layers.CreateLayer (string.Empty, h, w);
-			
-			using (Cairo.Context g = new Cairo.Context (dest.Surface)) {
-				g.Translate (h / 2, w / 2);
-				g.Rotate (Math.PI / -2);
-				g.Translate (-w / 2, -h / 2);
-				g.SetSource (Surface);
-				
-				g.Paint ();
-			}
-			
-			Surface old = Surface;
-			Surface = dest.Surface;
-			(old as IDisposable).Dispose ();
+			double radians = (angle / 180d) * Math.PI;
+			double cos = Math.Abs (Math.Cos (radians));
+			double sin = Math.Abs (Math.Sin (radians));
+			int w = originalSize.Width;
+			int h = originalSize.Height;
+
+			return new Gdk.Size ((int)(w * cos + h * sin), (int)(w * sin + h * cos));
 		}
 		
 		public unsafe void HueSaturation (int hueDelta, int satDelta, int lightness)
@@ -200,7 +189,7 @@ namespace Pinta.Core
 			
 			using (Context g = new Context (Surface)) {
 				g.AppendPath (PintaCore.Layers.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
+				g.FillRule = Cairo.FillRule.EvenOdd;
 				g.Clip ();
 
 				g.SetSource (dest);
@@ -213,14 +202,17 @@ namespace Pinta.Core
 		public void Resize (int width, int height)
 		{
 			ImageSurface dest = new ImageSurface (Format.Argb32, width, height);
+			Pixbuf pb = Surface.ToPixbuf();
+			Pixbuf pbScaled = pb.ScaleSimple (width, height, InterpType.Bilinear);
 
 			using (Context g = new Context (dest)) {
-				g.Scale ((double)width / (double)Surface.Width, (double)height / (double)Surface.Height);
-				g.SetSourceSurface (Surface, 0, 0);
+				CairoHelper.SetSourcePixbuf (g, pbScaled, 0, 0);
 				g.Paint ();
 			}
 
 			(Surface as IDisposable).Dispose ();
+			(pb as IDisposable).Dispose ();
+			(pbScaled as IDisposable).Dispose ();
 			Surface = dest;
 		}
 
@@ -269,12 +261,21 @@ namespace Pinta.Core
 			Surface = dest;
 		}
 
-		public void Crop (Rectangle rect)
+		public void Crop (Gdk.Rectangle rect, Path path)
 		{
-			ImageSurface dest = new ImageSurface (Format.Argb32, (int)rect.Width, (int)rect.Height);
+			ImageSurface dest = new ImageSurface (Format.Argb32, rect.Width, rect.Height);
 
 			using (Context g = new Context (dest)) {
-				g.SetSourceSurface (Surface, -(int)rect.X, -(int)rect.Y);
+				// Move the selected content to the upper left
+				g.Translate (-rect.X, -rect.Y);
+				g.Antialias = Antialias.None;
+
+				// Respect the selected path
+				g.AppendPath (path);
+				g.FillRule = Cairo.FillRule.EvenOdd;
+				g.Clip ();
+
+				g.SetSource (Surface);
 				g.Paint ();
 			}
 

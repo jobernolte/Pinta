@@ -1,0 +1,1997 @@
+# Indonesian translation for pinta
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the pinta package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pinta\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2011-02-28 17:08-0600\n"
+"PO-Revision-Date: 2012-04-02 01:07+0000\n"
+"Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
+"Language-Team: Indonesian <permataharahap@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Launchpad-Export-Date: 2012-04-28 16:20+0000\n"
+"X-Generator: Launchpad (build 15149)\n"
+"X-Poedit-Country: INDONESIA\n"
+"X-Poedit-Language: Indonesian\n"
+
+#: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
+msgid "Auto Level"
+msgstr "Auto-Level"
+
+#: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
+msgid "Invert Colors"
+msgstr "Inversikan Warna"
+
+#: Pinta.Effects/Adjustments/LevelsEffect.cs:24
+msgid "Levels"
+msgstr "Tingkat"
+
+#: Pinta.Effects/Adjustments/SepiaEffect.cs:27
+msgid "Sepia"
+msgstr "Sepia"
+
+#: Pinta.Effects/Adjustments/PosterizeEffect.cs:26
+#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
+msgid "Posterize"
+msgstr "Posterkan"
+
+#: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
+msgid "Black and White"
+msgstr "Hitam dan Putih"
+
+#: Pinta.Effects/Adjustments/CurvesEffect.cs:28
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
+msgid "Curves"
+msgstr "Kurva"
+
+#: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:30
+msgid "Brightness / Contrast"
+msgstr "Kecerahan / Kontras"
+
+#: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
+msgid "Hue / Saturation"
+msgstr "Warna / Kepekatan"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
+msgid "Levels Adjustment"
+msgstr "Penyesuaian Level"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
+msgid "Input Histogram"
+msgstr "Masukan Histogram"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
+msgid "Input"
+msgstr "Masukan"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:285
+msgid "Output"
+msgstr "Keluaran"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
+msgid "Output Histogram"
+msgstr "Keluaran Histogram"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:456
+msgid "Auto"
+msgstr "Auto"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:468
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:173
+msgid "Reset"
+msgstr "Atur Ulang"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:478
+msgid "Red"
+msgstr "Merah"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:489
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:142
+msgid "Green"
+msgstr "Hijau"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:528
+msgid "Blue"
+msgstr "Biru"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
+msgid "Linked"
+msgstr "Terkait"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
+msgid "Transfer Map"
+msgstr "Peta Transfer"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
+msgid "RGB"
+msgstr "RGB"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:86
+msgid "Luminosity"
+msgstr "Kecemerlangan"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:100
+msgid "(256, 256)"
+msgstr "(256, 256)"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:131
+msgid "Red  "
+msgstr "Merah  "
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:153
+msgid "Blue "
+msgstr "Biru "
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
+msgid "Tip: Right-click to remove control points."
+msgstr "Tip: Klik-kanan untuk menghapus titik kendali."
+
+#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
+msgid "Reduce Noise"
+msgstr "Kurangi Derau"
+
+#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:37
+#: Pinta.Effects/Effects/MedianEffect.cs:37
+#: Pinta.Effects/Effects/AddNoiseEffect.cs:38
+msgid "Noise"
+msgstr "Derau"
+
+#: Pinta.Effects/Effects/FragmentEffect.cs:26
+msgid "Fragment"
+msgstr "Fragmen"
+
+#: Pinta.Effects/Effects/FragmentEffect.cs:34
+#: Pinta.Effects/Effects/UnfocusEffect.cs:36
+#: Pinta.Effects/Effects/RadialBlurEffect.cs:34
+#: Pinta.Effects/Effects/GaussianBlurEffect.cs:34
+#: Pinta.Effects/Effects/MotionBlurEffect.cs:34
+#: Pinta.Effects/Effects/ZoomBlurEffect.cs:34
+msgid "Blurs"
+msgstr "Buram"
+
+#: Pinta.Effects/Effects/CloudsEffect.cs:30
+msgid "Clouds"
+msgstr "Awan"
+
+#: Pinta.Effects/Effects/CloudsEffect.cs:38
+#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
+#: Pinta.Effects/Effects/JuliaFractalEffect.cs:34
+msgid "Render"
+msgstr "Pencitraan"
+
+#: Pinta.Effects/Effects/UnfocusEffect.cs:28
+msgid "Unfocus"
+msgstr "Awafokus"
+
+#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:29
+msgid "Red Eye Removal"
+msgstr "Hilangkan Mata Merah"
+
+#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:37
+#: Pinta.Effects/Effects/GlowEffect.cs:39
+#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:67
+#: Pinta.Effects/Effects/SharpenEffect.cs:34
+msgid "Photo"
+msgstr "Foto"
+
+#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
+msgid "Mandelbrot Fractal"
+msgstr "Fraktal Mandelbrot"
+
+#: Pinta.Effects/Effects/GlowEffect.cs:31
+msgid "Glow"
+msgstr "Berpendar"
+
+#: Pinta.Effects/Effects/EdgeDetectEffect.cs:29
+msgid "Edge Detect"
+msgstr "Deteksi Tepian"
+
+#: Pinta.Effects/Effects/EdgeDetectEffect.cs:37
+#: Pinta.Effects/Effects/ReliefEffect.cs:33
+#: Pinta.Effects/Effects/EmbossEffect.cs:34
+#: Pinta.Effects/Effects/OutlineEffect.cs:37
+msgid "Stylize"
+msgstr "Gayakan"
+
+#: Pinta.Effects/Effects/RadialBlurEffect.cs:26
+msgid "Radial Blur"
+msgstr "Pengaburan Melingkar"
+
+#: Pinta.Effects/Effects/FrostedGlassEffect.cs:26
+msgid "Frosted Glass"
+msgstr "Kaca Buram"
+
+#: Pinta.Effects/Effects/FrostedGlassEffect.cs:34
+#: Pinta.Effects/Effects/TileEffect.cs:34
+#: Pinta.Effects/Effects/PixelateEffect.cs:38
+#: Pinta.Effects/Effects/PolarInversionEffect.cs:39
+#: Pinta.Effects/Effects/BulgeEffect.cs:34
+#: Pinta.Effects/Effects/TwistEffect.cs:34
+msgid "Distort"
+msgstr "Distorsi"
+
+#: Pinta.Effects/Effects/OilPaintingEffect.cs:26
+msgid "Oil Painting"
+msgstr "Cat Minyak"
+
+#: Pinta.Effects/Effects/OilPaintingEffect.cs:34
+#: Pinta.Effects/Effects/InkSketchEffect.cs:42
+#: Pinta.Effects/Effects/PencilSketchEffect.cs:41
+msgid "Artistic"
+msgstr "Artistik"
+
+#: Pinta.Effects/Effects/JuliaFractalEffect.cs:26
+msgid "Julia Fractal"
+msgstr "Fraktal Julia"
+
+#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
+msgid "Soften Portrait"
+msgstr "Haluskan Foto"
+
+#: Pinta.Effects/Effects/ReliefEffect.cs:45
+msgid "Relief"
+msgstr "Relief"
+
+#: Pinta.Effects/Effects/InkSketchEffect.cs:34
+msgid "Ink Sketch"
+msgstr "Sketsa Tinta"
+
+#: Pinta.Effects/Effects/MedianEffect.cs:29
+msgid "Median"
+msgstr "Median"
+
+#: Pinta.Effects/Effects/EmbossEffect.cs:26
+msgid "Emboss"
+msgstr "Timbul"
+
+#: Pinta.Effects/Effects/GaussianBlurEffect.cs:26
+msgid "Gaussian Blur"
+msgstr "Pengaburan Gaussian"
+
+#: Pinta.Effects/Effects/SharpenEffect.cs:26
+msgid "Sharpen"
+msgstr "Pertajam"
+
+#: Pinta.Effects/Effects/AddNoiseEffect.cs:30
+msgid "Add Noise"
+msgstr "Tambah derau"
+
+#: Pinta.Effects/Effects/TileEffect.cs:26
+msgid "Tile Reflection"
+msgstr "Refleksi Ubin"
+
+#: Pinta.Effects/Effects/PixelateEffect.cs:26
+msgid "Pixelate"
+msgstr "Pikselkan"
+
+#: Pinta.Effects/Effects/MotionBlurEffect.cs:26
+msgid "Motion Blur"
+msgstr "Pengaburan Gerak"
+
+#: Pinta.Effects/Effects/PolarInversionEffect.cs:26
+msgid "Polar Inversion"
+msgstr "Inversi Kutub"
+
+#: Pinta.Effects/Effects/BulgeEffect.cs:26
+msgid "Bulge"
+msgstr "Tonjolkan"
+
+#: Pinta.Effects/Effects/ZoomBlurEffect.cs:26
+msgid "Zoom Blur"
+msgstr "Pengaburan Zum"
+
+#: Pinta.Effects/Effects/PencilSketchEffect.cs:33
+msgid "Pencil Sketch"
+msgstr "Sketsa Pensil"
+
+#: Pinta.Effects/Effects/OutlineEffect.cs:29
+#: Pinta.Tools/TextTool/TextTool.cs:171
+msgid "Outline"
+msgstr "Kerangka"
+
+#: Pinta.Effects/Effects/TwistEffect.cs:26
+msgid "Twist"
+msgstr "Pelintir"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
+msgid "label1"
+msgstr "label1"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
+msgid "label"
+msgstr "label"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
+msgid "Random Noise"
+msgstr "Derau Acak"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
+msgid "Reseed"
+msgstr "Umpankan-ulang"
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:75
+msgid "Choose Primary Color"
+msgstr "Pilih Warna Primer"
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:89
+msgid "Choose Secondary Color"
+msgstr "Pilih Warna Sekunder"
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:112
+msgid "Choose Palette Color"
+msgstr "Pilih Warna Palet"
+
+#: Pinta.Tools/RectangleSelectTool.cs:38
+msgid "Rectangle Select"
+msgstr "Pemilih Persegi Panjang"
+
+#: Pinta.Tools/RectangleSelectTool.cs:44
+msgid ""
+"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"square."
+msgstr ""
+"Klik dan seret untuk memilih bentuk persegi panjang. Tahan shift untuk "
+"membentuk bujursangkar."
+
+#: Pinta.Tools/CloneStampTool.cs:43
+msgid "Clone Stamp"
+msgstr "Duplikasi Stempel"
+
+#: Pinta.Tools/CloneStampTool.cs:48
+msgid "Ctrl-left click to set origin, left click to paint."
+msgstr "Ctrl-Kiri untuk menentukan titik mula, klik kiri untuk melukis"
+
+#: Pinta.Tools/MagicWandTool.cs:46
+msgid "Magic Wand Select"
+msgstr "Pemilih Tongkat Ajaib"
+
+#: Pinta.Tools/MagicWandTool.cs:54
+msgid "Click to select region of similar color."
+msgstr "Pilih untuk memilih area yang warnanya mirip."
+
+#: Pinta.Tools/RectangleTool.cs:38
+msgid "Rectangle"
+msgstr "Persegi Panjang"
+
+#: Pinta.Tools/RectangleTool.cs:44
+msgid ""
+"Click and drag to draw a rectangle (right click for secondary color). Hold "
+"shift to constrain to a square."
+msgstr ""
+"Klik dan seret untuk menggambar persegi panjang (klik kanan untuk warna "
+"sekunder). Tahan shift untuk memaksakan bentuk bujursangkar."
+
+#: Pinta.Tools/MoveSelectionTool.cs:42
+msgid "Move Selection"
+msgstr "Pindahkan Pemilih"
+
+#: Pinta.Tools/MoveSelectionTool.cs:48
+msgid "Drag the selection to move selection outline."
+msgstr "Seret pemilih untuk memindahkan garis tepi pemilih."
+
+#: Pinta.Tools/GradientTool.cs:56 Pinta.Tools/GradientTool.cs:167
+msgid "Gradient"
+msgstr "Gradiasi"
+
+#: Pinta.Tools/GradientTool.cs:64
+msgid ""
+"Click and drag to draw gradient from primary to secondary color.  Right "
+"click to reverse."
+msgstr ""
+"Klik dan seret untuk menggambar gradasi dari warna primer ke sekunder. Klik "
+"kanan untuk sebaliknya."
+
+#: Pinta.Tools/GradientTool.cs:174
+msgid "Linear Gradient"
+msgstr "Gradasi Linear"
+
+#: Pinta.Tools/GradientTool.cs:175
+msgid "Linear Reflected Gradient"
+msgstr "Gradasi Linear Tercerminkan"
+
+#: Pinta.Tools/GradientTool.cs:176
+msgid "Linear Diamond Gradient"
+msgstr "Gradasi Linear Wajik"
+
+#: Pinta.Tools/GradientTool.cs:177
+msgid "Radial Gradient"
+msgstr "Gradasi Melingkar"
+
+#: Pinta.Tools/GradientTool.cs:178
+msgid "Conical Gradient"
+msgstr "Gradasi Mengerucut"
+
+#: Pinta.Tools/FloodTool.cs:73
+msgid "Flood Mode"
+msgstr "Modus curah"
+
+#: Pinta.Tools/FloodTool.cs:80
+msgid "Contiguous"
+msgstr "Bersambungan"
+
+#: Pinta.Tools/FloodTool.cs:81
+msgid "Global"
+msgstr "Global"
+
+#: Pinta.Tools/FloodTool.cs:92 Pinta.Tools/RecolorTool.cs:73
+msgid "Tolerance"
+msgstr "Toleransi"
+
+#: Pinta.Tools/PaintBrushTool.cs:41 Pinta/MainWindow.cs:401
+msgid "Paintbrush"
+msgstr "Kuas Cat"
+
+#: Pinta.Tools/PaintBrushTool.cs:43 Pinta.Tools/FreeformShapeTool.cs:55
+msgid ""
+"Left click to draw with primary color, right click to draw with secondary "
+"color."
+msgstr ""
+"Klik kiri untuk menggambar dengan warna primer, klik kanan untuk warna "
+"sekunder."
+
+#: Pinta.Tools/PaintBrushTool.cs:64
+msgid "Type"
+msgstr "Jenis"
+
+#: Pinta.Tools/PencilTool.cs:48 Pinta.Tools/ColorPickerTool.cs:120
+msgid "Pencil"
+msgstr "Pensil"
+
+#: Pinta.Tools/PencilTool.cs:50
+msgid ""
+"Left click to draw freeform, one-pixel wide lines with the primary color, "
+"right click to use the secondary color."
+msgstr ""
+"Klik kiri untuk menggambar garis bentuk bebas selebar satu piksel dengan "
+"warna primer, klik kanan untuk warna sekunder."
+
+#: Pinta.Tools/EllipseSelectTool.cs:38
+msgid "Ellipse Select"
+msgstr "Pemilih Elips"
+
+#: Pinta.Tools/EllipseSelectTool.cs:44
+msgid ""
+"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"circle."
+msgstr ""
+"Klik dan seret untuk menggambar pemilih elips. Tahan shift untuk memaksakan "
+"bentuk lingkaran."
+
+#: Pinta.Tools/LineCurveTool.cs:38
+msgid "Line"
+msgstr "Garis"
+
+#: Pinta.Tools/LineCurveTool.cs:43
+msgid ""
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
+msgstr ""
+"Klik kiri untuh menggambar dengan warna primer, klik kanan untuk warna "
+"sekunder. Tahan tombol Shift untuk menjaga sudut"
+
+#: Pinta.Tools/EraserTool.cs:45
+msgid "Eraser"
+msgstr "Penghapus"
+
+#: Pinta.Tools/EraserTool.cs:47
+msgid ""
+"Left click to erase to transparent, right click to erase to secondary color. "
+msgstr ""
+"Ctrl-Kiri untuk menghapus ketransparan, klik kiri untuk menghapus ke warna "
+"sekunder "
+
+#: Pinta.Tools/PanTool.cs:38
+msgid "Pan"
+msgstr "Geser"
+
+#: Pinta.Tools/PanTool.cs:44
+msgid "Click and drag to navigate image."
+msgstr "Klik dan seret untuk menavigasi citra."
+
+#: Pinta.Tools/ColorPickerTool.cs:44
+msgid "Color Picker"
+msgstr "Pemilih Warna"
+
+#: Pinta.Tools/ColorPickerTool.cs:50
+msgid "Left click to set primary color. Right click to set secondary color."
+msgstr ""
+"Klik kiri untuk mengeset warna primer. Klik kanan untuk warna sekunder."
+
+#: Pinta.Tools/ColorPickerTool.cs:62
+msgid "After select"
+msgstr "Setelah memilih"
+
+#: Pinta.Tools/ColorPickerTool.cs:68
+msgid "Do not switch tool"
+msgstr "Jangan ganti alat"
+
+#: Pinta.Tools/ColorPickerTool.cs:68
+msgid "Switch to previous tool"
+msgstr "Ganti ke alat sebelumnya"
+
+#: Pinta.Tools/ColorPickerTool.cs:68
+msgid "Switch to Pencil tool"
+msgstr "Ganti ke alat Pensil"
+
+#: Pinta.Tools/RoundedRectangleTool.cs:44
+msgid "Rounded Rectangle"
+msgstr "Persegi Panjang Berlengkung"
+
+#: Pinta.Tools/RoundedRectangleTool.cs:50
+msgid ""
+"Click and drag to draw a rounded rectangle (right click for secondary "
+"color). Hold shift to constrain to a square."
+msgstr ""
+
+#: Pinta.Tools/RoundedRectangleTool.cs:83
+msgid "Radius"
+msgstr "Jari-jari"
+
+#: Pinta.Tools/RoundedRectangleTool.cs:88
+msgid "Decrease rectangle's corner radius"
+msgstr "Kecilkan jari-jari lengkungan sudut persegi panjang"
+
+#: Pinta.Tools/RoundedRectangleTool.cs:102
+msgid "Increase rectangle's corner radius"
+msgstr "Besarkan jari-jari lengkungan sudut persegi panjang"
+
+#: Pinta.Tools/MoveSelectedTool.cs:42
+#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:70
+#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:64
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Move Selected Pixels"
+msgstr "Pindahkan Piksel Terpilih"
+
+#: Pinta.Tools/MoveSelectedTool.cs:48
+msgid "Drag the selection to move selected content."
+msgstr "Seret pilihan untuk memindahkan isi terpilih."
+
+#: Pinta.Tools/RecolorTool.cs:59
+msgid "Recolor"
+msgstr "Warnai-ulang"
+
+#: Pinta.Tools/RecolorTool.cs:61
+msgid "Left click to replace the secondary color with the primary color."
+msgstr "Klik kiri untuk mengganti warna sekunder dengan warna primer."
+
+#: Pinta.Tools/PaintBucketTool.cs:40
+msgid "Paint Bucket"
+msgstr "Ember Cat"
+
+#: Pinta.Tools/PaintBucketTool.cs:46
+msgid ""
+"Left click to fill a region with the primary color, right click to fill with "
+"the secondary color."
+msgstr ""
+"Klik kiri untuk mengisi area dengan warna primer, klik kanan untuk warna "
+"sekunder."
+
+#: Pinta.Tools/EllipseTool.cs:38
+msgid "Ellipse"
+msgstr "Elips"
+
+#: Pinta.Tools/EllipseTool.cs:44
+msgid ""
+"Click and drag to draw an ellipse (right click for secondary color). Hold "
+"shift to constrain to a circle."
+msgstr ""
+"Klik dan seret untuk menggambar elips (klik kanan untuk warna sekunder). "
+"Tahan shift untuk memaksakan bentuk lingkaran."
+
+#: Pinta.Tools/TextTool/TextTool.cs:36
+msgid "Text"
+msgstr "Teks"
+
+#: Pinta.Tools/TextTool/TextTool.cs:42
+msgid ""
+"Left click to place cursor, then type desired text. Text color is primary "
+"color."
+msgstr ""
+"Klik kanan untuk menempatkan kursor, lalu ketik teks yang diinginkan. Warna "
+"teks adalah warna primer."
+
+#: Pinta.Tools/TextTool/TextTool.cs:77
+msgid "Font"
+msgstr "Font"
+
+#: Pinta.Tools/TextTool/TextTool.cs:112
+msgid "Bold"
+msgstr "Tebal"
+
+#: Pinta.Tools/TextTool/TextTool.cs:119
+msgid "Italic"
+msgstr "Miring"
+
+#: Pinta.Tools/TextTool/TextTool.cs:126
+msgid "Underline"
+msgstr "Garis Bawah"
+
+#: Pinta.Tools/TextTool/TextTool.cs:135
+msgid "Left Align"
+msgstr "Rata Kiri"
+
+#: Pinta.Tools/TextTool/TextTool.cs:143
+msgid "Center Align"
+msgstr "Rata Tengah"
+
+#: Pinta.Tools/TextTool/TextTool.cs:150
+msgid "Right Align"
+msgstr "Rata Kanan"
+
+#: Pinta.Tools/TextTool/TextTool.cs:162
+msgid "Text Style"
+msgstr "Corak Teks"
+
+#: Pinta.Tools/TextTool/TextTool.cs:169 Pinta.Tools/Brushes/PlainBrush.cs:38
+msgid "Normal"
+msgstr "Normal"
+
+#: Pinta.Tools/TextTool/TextTool.cs:170
+msgid "Normal and Outline"
+msgstr "Normal dan Skema"
+
+#: Pinta.Tools/TextTool/TextTool.cs:174
+msgid "Fill Background"
+msgstr ""
+
+#: Pinta.Tools/TextTool/TextTool.cs:179
+msgid "Outline width"
+msgstr "Lebar outline"
+
+#: Pinta.Tools/TextTool/TextTool.cs:184
+msgid "Decrease outline size"
+msgstr "kurangi ukuran outline"
+
+#: Pinta.Tools/TextTool/TextTool.cs:201
+msgid "Increase outline size"
+msgstr "Tambah ukuran outline"
+
+#: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
+msgid "Brush width"
+msgstr "Lebar kuas"
+
+#: Pinta.Tools/ShapeTool.cs:104 Pinta.Tools/BaseBrushTool.cs:75
+msgid "Decrease brush size"
+msgstr "Kecilkan ukuran kuas"
+
+#: Pinta.Tools/ShapeTool.cs:118 Pinta.Tools/BaseBrushTool.cs:89
+msgid "Increase brush size"
+msgstr "Besarkan ukuran kuas"
+
+#: Pinta.Tools/ShapeTool.cs:131 Pinta.Tools/FreeformShapeTool.cs:71
+msgid "Fill Style"
+msgstr "Model isian"
+
+#: Pinta.Tools/ShapeTool.cs:138 Pinta.Tools/FreeformShapeTool.cs:78
+msgid "Outline Shape"
+msgstr "Bentuk Bergaris Tepi"
+
+#: Pinta.Tools/ShapeTool.cs:139 Pinta.Tools/FreeformShapeTool.cs:79
+msgid "Fill Shape"
+msgstr "Bentuk Berisi"
+
+#: Pinta.Tools/ShapeTool.cs:140 Pinta.Tools/FreeformShapeTool.cs:80
+msgid "Fill and Outline Shape"
+msgstr "Bentuk Berisi dan Bergaris Tepi"
+
+#: Pinta.Tools/Brushes/CircleBrush.cs:38
+msgid "Circles"
+msgstr "Lingkaran"
+
+#: Pinta.Tools/Brushes/GridBrush.cs:38
+msgid "Grid"
+msgstr "Petak"
+
+#: Pinta.Tools/Brushes/SquaresBrush.cs:40
+msgid "Squares"
+msgstr "Kotak"
+
+#: Pinta.Tools/Brushes/SplatterBrush.cs:38
+msgid "Splatter"
+msgstr ""
+
+#: Pinta.Tools/ZoomTool.cs:49
+msgid "Zoom"
+msgstr "Zum"
+
+#: Pinta.Tools/ZoomTool.cs:55
+msgid ""
+"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
+"selection."
+msgstr ""
+"Klik kiri untuk zum masuk. Klik kanan untuk zum keluar. Klik dan seret untuk "
+"zum dalam pilihan."
+
+#: Pinta.Tools/LassoSelectTool.cs:45
+msgid "Lasso Select"
+msgstr "Pemilih Laso"
+
+#: Pinta.Tools/LassoSelectTool.cs:47
+msgid "Click and drag to draw the outline for a selection area."
+msgstr "Klik dan seret untuk menggambar garis tepi area pemilihan."
+
+#: Pinta.Tools/FreeformShapeTool.cs:53
+msgid "Freeform Shape"
+msgstr "Bentuk Bebas"
+
+#: Pinta/MainWindow.cs:146 Pinta.Core/Actions/HelpActions.cs:53
+msgid "About"
+msgstr "Tentang"
+
+#: Pinta/MainWindow.cs:371 Pinta/MainWindow.cs:387
+msgid "..."
+msgstr "..."
+
+#: Pinta/MainWindow.cs:456
+msgid "_File"
+msgstr "Be_rkas"
+
+#: Pinta/MainWindow.cs:457
+msgid "_Edit"
+msgstr "_Edit"
+
+#: Pinta/MainWindow.cs:459
+msgid "_View"
+msgstr "_Tampakan"
+
+#: Pinta/MainWindow.cs:462
+msgid "_Image"
+msgstr "_Citra"
+
+#: Pinta/MainWindow.cs:463
+msgid "_Layers"
+msgstr "_Lapisan"
+
+#: Pinta/MainWindow.cs:464
+msgid "_Adjustments"
+msgstr "_Penyesuaian"
+
+#: Pinta/MainWindow.cs:465
+msgid "Effe_cts"
+msgstr "Efe_k"
+
+#: Pinta/MainWindow.cs:467
+msgid "_Window"
+msgstr "_Jendela"
+
+#: Pinta/MainWindow.cs:471
+msgid "Tool Windows"
+msgstr "Jendela Alat"
+
+#: Pinta/MainWindow.cs:475
+msgid "_Help"
+msgstr "_Bantuan"
+
+#: Pinta/MainWindow.cs:557 Pinta/MainWindow.cs:563
+msgid "Tools"
+msgstr "Alat"
+
+#: Pinta/MainWindow.cs:571 Pinta/MainWindow.cs:578
+#: Pinta.Core/Actions/EditActions.cs:121
+msgid "Palette"
+msgstr "Palet"
+
+#: Pinta/MainWindow.cs:588
+msgid "Documents"
+msgstr "Dokumen"
+
+#: Pinta/MainWindow.cs:638 Pinta/MainWindow.cs:649
+msgid "Layers"
+msgstr "Lapisan"
+
+#: Pinta/MainWindow.cs:658 Pinta/MainWindow.cs:665
+msgid "History"
+msgstr "Riwayat"
+
+#: Pinta/DockLibrary/DockItemContainer.cs:90 Pinta/DockLibrary/DockItem.cs:477
+msgid "Hide"
+msgstr "Sembunyikan"
+
+#: Pinta/DockLibrary/DockItemContainer.cs:190
+msgid "Dock"
+msgstr "Berlabuh"
+
+#: Pinta/DockLibrary/DockItemContainer.cs:194
+#: Pinta/DockLibrary/DockItem.cs:502
+msgid "Auto Hide"
+msgstr "Auto-Sembunyikan"
+
+#: Pinta/DockLibrary/DockItem.cs:485
+msgid "Dockable"
+msgstr "Dapat dilabuhkan"
+
+#: Pinta/DockLibrary/DockItem.cs:493
+msgid "Floating"
+msgstr "Mengambang"
+
+#: Pinta/DialogHandlers.cs:109
+msgid "Take Screenshot"
+msgstr "Ambil Cuplikan Layar"
+
+#: Pinta/DialogHandlers.cs:110
+msgid "Delay before taking a screenshot (seconds):"
+msgstr "Jeda sebelum mengambil cuplikan layar (dalam detik)"
+
+#: Pinta/DialogHandlers.cs:158
+#, csharp-format
+msgid "Save the changes to image \"{0}\" before closing?"
+msgstr "Simpan perubahan ke citra \"{0}\" sebelum menutup?"
+
+#: Pinta/DialogHandlers.cs:159
+msgid "If you don't save, all changes will be permanently lost."
+msgstr "Bila Anda tidak simpan, semua perubahan akan hilang."
+
+#: Pinta/DialogHandlers.cs:166
+msgid "Close without saving"
+msgstr "Tutup tanpa menyimpan"
+
+#: Pinta/DialogHandlers.cs:193
+msgid "Resize Palette"
+msgstr ""
+
+#: Pinta/DialogHandlers.cs:194
+msgid "New palette size:"
+msgstr ""
+
+#: Pinta/DialogHandlers.cs:223 Pinta.Core/Actions/EditActions.cs:70
+msgid "Paste Into New Layer"
+msgstr "Tempel Ke Lapisan Baru"
+
+#: Pinta/DialogHandlers.cs:320
+msgid "Layer Opacity"
+msgstr "Ketaktembusan Lapisan"
+
+#: Pinta/DialogHandlers.cs:325
+msgid "Rename Layer"
+msgstr "Ubah Nama Lapisan"
+
+#: Pinta/DialogHandlers.cs:330
+msgid "Hide Layer"
+msgstr "Sembunyikan Lapisan"
+
+#: Pinta/DialogHandlers.cs:330
+msgid "Show Layer"
+msgstr "Tampilkan Lapisan"
+
+#: Pinta/DialogHandlers.cs:335 Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:44
+msgid "Layer Properties"
+msgstr "Properti Lapisan"
+
+#: Pinta/DialogHandlers.cs:415 Pinta.Core/Actions/LayerActions.cs:156
+msgid "Open Image File"
+msgstr "Buka Berkas Citra"
+
+#: Pinta/DialogHandlers.cs:423
+msgid "Image files"
+msgstr "Berkas citra"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:528
+#: Pinta/DialogHandlers.cs:427 Pinta.Core/Actions/EditActions.cs:330
+msgid "All files"
+msgstr "Semua berkas"
+
+#: Pinta/DialogHandlers.cs:514
+msgid "Save Image File"
+msgstr "Simpan Berkas Citra"
+
+#: Pinta/DialogHandlers.cs:612
+msgid "Pinta does not support saving images in this file format."
+msgstr "Pinta tidak dapat menyimpan gambar dalam format ini"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:23
+#: Pinta/DialogHandlers.cs:613 Pinta.Core/Managers/WorkspaceManager.cs:185
+#: Pinta.Core/Actions/EditActions.cs:347
+msgid "Error"
+msgstr "Kesalahan"
+
+#: Pinta/DialogHandlers.cs:633
+#, csharp-format
+msgid "A file named \"{0}\" already exists. Do you want to replace it?"
+msgstr "File bernama \"{0}\" sudah ada. Apakah anda ingin mengantinya?"
+
+#: Pinta/DialogHandlers.cs:634
+#, csharp-format
+msgid ""
+"The file already exists in \"{1}\". Replacing it will overwrite its contents."
+msgstr ""
+"File sudah ada di \"{1}\". Mengantinya akan menghilangkan isi folder."
+
+#: Pinta/Dialogs/ClipboardEmptyDialog.cs:36
+msgid "Image cannot be pasted"
+msgstr ""
+
+#: Pinta/Dialogs/ClipboardEmptyDialog.cs:37
+msgid "The clipboard does not contain an image."
+msgstr ""
+
+#: Pinta/Dialogs/JpegCompressionDialog.cs:38
+msgid "JPEG Quality"
+msgstr "Kualitas JPEG"
+
+#: Pinta/Dialogs/JpegCompressionDialog.cs:46
+msgid "Quality: "
+msgstr "Kualitas: "
+
+#: Pinta/Dialogs/VersionInformationTabPage.cs:44
+msgid "Title"
+msgstr "Judul"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:290
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:143
+#: Pinta/Dialogs/VersionInformationTabPage.cs:50
+#: Pinta/Dialogs/AboutPintaTabPage.cs:41
+msgid "Version"
+msgstr "Versi"
+
+#: Pinta/Dialogs/VersionInformationTabPage.cs:53
+msgid "Path"
+msgstr "Jalur"
+
+#: Pinta/Dialogs/AboutDialog.cs:101
+msgid "Contributors to this Release"
+msgstr "Kontributor Rilis Ini"
+
+#: Pinta/Dialogs/AboutDialog.cs:111
+msgid "Previous Contributors"
+msgstr "Kontributor Sebelumnya"
+
+#: Pinta/Dialogs/AboutDialog.cs:120
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Cameron White https://launchpad.net/~cameronwhite91\n"
+"  Fauzie Rofi https://launchpad.net/~fauzie811\n"
+"  H Parulian Hutagalung https://launchpad.net/~bataxx-keren\n"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Permata Harahap https://launchpad.net/~permataharahap\n"
+"  Triwanto Simanjuntak https://launchpad.net/~lu176\n"
+"  Viko Adi Rahmawan https://launchpad.net/~vikoadi"
+
+#: Pinta/Dialogs/AboutDialog.cs:123
+msgid "Translated by:"
+msgstr "Diterjemahkan oleh:"
+
+#: Pinta/Dialogs/AboutDialog.cs:130
+msgid "Based on the work of Paint.NET:"
+msgstr "Berdasarkan karya Paint.NET:"
+
+#: Pinta/Dialogs/AboutDialog.cs:137
+msgid "Using some icons from:"
+msgstr "Menggunakan ikon dari:"
+
+#: Pinta/Dialogs/AboutDialog.cs:249
+msgid "About Pinta"
+msgstr "Tentang Pinta"
+
+#: Pinta/Dialogs/AboutDialog.cs:267
+msgid "Version Info"
+msgstr "Info Versi"
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:50
+msgid "License"
+msgstr "Lisensi"
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:50
+msgid "Released under the MIT X11 License."
+msgstr "Dirilis di bawah Lisensi MIT X11."
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:57
+msgid "Copyright"
+msgstr "Hak Cipta"
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:57
+msgid "by Pinta contributors"
+msgstr "oleh kontributor Pinta"
+
+#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:62
+msgid "Name:"
+msgstr "Nama:"
+
+#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:86
+msgid "Visible"
+msgstr "Terlihat"
+
+#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:109
+msgid "Opacity:"
+msgstr "Ketaktembusan:"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
+#: Pinta.Core/Classes/Document.cs:612
+msgid "Resize Canvas"
+msgstr "Ubah Ukuran Kanvas"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
+msgid "By percentage:"
+msgstr "Per persentasi:"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
+msgid "By absolute size:"
+msgstr "Per ukuran absolut:"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:148
+msgid "Width:"
+msgstr "Lebar:"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:123
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:135
+msgid "pixels"
+msgstr "piksel"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:161
+msgid "Height:"
+msgstr "Tinggi:"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
+msgid "Maintain aspect ratio"
+msgstr "Pertahankan rasio panjang-lebar"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
+msgid "Anchor:"
+msgstr "Jangkar:"
+
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
+#: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
+msgid "Resize Image"
+msgstr "Ubah Ukuran Citra"
+
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:48
+#: Pinta.Core/Managers/WorkspaceManager.cs:159
+msgid "New Image"
+msgstr "Citra Baru"
+
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:58
+msgid "New Image Size          "
+msgstr "Ukuran Citra Baru          "
+
+#: Pinta/Main.cs:68
+msgid "number of threads to use for rendering"
+msgstr "jumlah ulir yang digunakan untuk melukis"
+
+#: Pinta/Options.cs:486
+msgid "OptionName"
+msgstr ""
+
+#: Pinta.Core/Managers/LivePreviewManager.cs:220
+msgid "Rendering Effect"
+msgstr "Efek Lukis"
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:91
+#, csharp-format
+msgid "Unsaved Image {0}"
+msgstr ""
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:150
+msgid "Background"
+msgstr "Latar Belakang"
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:177
+msgid "Open Image"
+msgstr "Buka Citra"
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:184
+#, csharp-format
+msgid "Could not open file: {0}"
+msgstr "Gagal membuka berkas: {0}"
+
+#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
+#: Pinta.Core/Actions/EditActions.cs:69
+msgid "Paste"
+msgstr "Tempel"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
+#: Pinta.Core/Actions/ImageActions.cs:65
+msgid "Rotate 180°"
+msgstr "Putar 180°"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
+msgid "Flip Image Horizontal"
+msgstr "Balikkan Citra Horizontal"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
+msgid "Flip Image Vertical"
+msgstr "Balikkan Citra Vertikal"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
+#: Pinta.Core/Actions/ImageActions.cs:63
+msgid "Rotate 90° Clockwise"
+msgstr "Putar 90° Perijam"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
+#: Pinta.Core/Actions/ImageActions.cs:64
+msgid "Rotate 90° Counter-Clockwise"
+msgstr "Putar 90° Lawan-Perijam"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
+msgid "Flip Layer Horizontal"
+msgstr "Balikkan Lapisan Horizontal"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
+msgid "Flip Layer Vertical"
+msgstr "Balikkan Lapisan Vertikal"
+
+#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
+msgid "Finish Pixels"
+msgstr "Selesaikan Piksel"
+
+#: Pinta.Core/Actions/HelpActions.cs:50
+msgid "Pinta Website"
+msgstr "Laman Web Pinta"
+
+#: Pinta.Core/Actions/HelpActions.cs:51
+msgid "File a Bug"
+msgstr "Laporkan Masalah"
+
+#: Pinta.Core/Actions/HelpActions.cs:52
+msgid "Translate This Application"
+msgstr "Terjemahkan Aplikasi Ini"
+
+#: Pinta.Core/Actions/WindowActions.cs:45
+msgid "Save All"
+msgstr "Simpan Semua"
+
+#: Pinta.Core/Actions/WindowActions.cs:46
+msgid "Close All"
+msgstr "Tutup Semua"
+
+#: Pinta.Core/Actions/FileActions.cs:54
+msgid "New..."
+msgstr "Baru..."
+
+#: Pinta.Core/Actions/FileActions.cs:55
+msgid "New Screenshot..."
+msgstr ""
+
+#: Pinta.Core/Actions/FileActions.cs:56 Pinta.Core/Actions/EditActions.cs:78
+msgid "Open..."
+msgstr "Buka..."
+
+#: Pinta.Core/Actions/FileActions.cs:57
+msgid "Open Recent"
+msgstr "Buka Terkini"
+
+#: Pinta.Core/Actions/FileActions.cs:64
+msgid "Close"
+msgstr "Tutup"
+
+#: Pinta.Core/Actions/FileActions.cs:65
+msgid "Save"
+msgstr "Simpan"
+
+#: Pinta.Core/Actions/FileActions.cs:66 Pinta.Core/Actions/EditActions.cs:79
+msgid "Save As..."
+msgstr "Simpan Sebagai..."
+
+#: Pinta.Core/Actions/FileActions.cs:67
+msgid "Print"
+msgstr "Cetak"
+
+#: Pinta.Core/Actions/FileActions.cs:68
+msgid "Quit"
+msgstr "Keluar"
+
+#: Pinta.Core/Actions/FileActions.cs:70
+msgid "New"
+msgstr "Baru"
+
+#: Pinta.Core/Actions/FileActions.cs:71
+msgid "Open"
+msgstr "Buka"
+
+#: Pinta.Core/Actions/LayerActions.cs:64
+#: Pinta.Core/Actions/LayerActions.cs:283
+msgid "Add New Layer"
+msgstr "Tambah Lapisan Baru"
+
+#: Pinta.Core/Actions/LayerActions.cs:65
+#: Pinta.Core/Actions/LayerActions.cs:266
+msgid "Delete Layer"
+msgstr "Hapus Lapisan"
+
+#: Pinta.Core/Actions/LayerActions.cs:66
+#: Pinta.Core/Actions/LayerActions.cs:257
+msgid "Duplicate Layer"
+msgstr "Gandakan Lapisan"
+
+#: Pinta.Core/Actions/LayerActions.cs:67
+#: Pinta.Core/Actions/LayerActions.cs:235
+msgid "Merge Layer Down"
+msgstr "Gabungkan Ke Bawahnya"
+
+#: Pinta.Core/Actions/LayerActions.cs:68
+msgid "Import from File..."
+msgstr "Impor dari Berkas..."
+
+#: Pinta.Core/Actions/LayerActions.cs:69 Pinta.Core/Actions/ImageActions.cs:61
+msgid "Flip Horizontal"
+msgstr "Balikkan Horizontal"
+
+#: Pinta.Core/Actions/LayerActions.cs:70 Pinta.Core/Actions/ImageActions.cs:62
+msgid "Flip Vertical"
+msgstr "Balikkan Vertikal"
+
+#: Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr ""
+
+#: Pinta.Core/Actions/LayerActions.cs:72
+#: Pinta.Core/Actions/LayerActions.cs:213
+msgid "Move Layer Up"
+msgstr "Naikkan Lapisan"
+
+#: Pinta.Core/Actions/LayerActions.cs:73
+#: Pinta.Core/Actions/LayerActions.cs:224
+msgid "Move Layer Down"
+msgstr "Turunkan Lapisan"
+
+#: Pinta.Core/Actions/LayerActions.cs:74
+msgid "Layer Properties..."
+msgstr ""
+
+#: Pinta.Core/Actions/LayerActions.cs:179
+msgid "Import From File"
+msgstr "Impor Dari Berkas"
+
+#: Pinta.Core/Actions/ImageActions.cs:58
+#: Pinta.Core/Actions/ImageActions.cs:181
+msgid "Crop to Selection"
+msgstr "Pangkas Pilihan"
+
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
+msgstr ""
+
+#: Pinta.Core/Actions/ImageActions.cs:59
+msgid "Resize Image..."
+msgstr ""
+
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Resize Canvas..."
+msgstr ""
+
+#: Pinta.Core/Actions/ImageActions.cs:66
+#: Pinta.Core/Actions/ImageActions.cs:127
+msgid "Flatten"
+msgstr "Sedatarkan"
+
+#: Pinta.Core/Actions/ViewActions.cs:63
+msgid "Zoom In"
+msgstr "Zum Masuk"
+
+#: Pinta.Core/Actions/ViewActions.cs:64
+msgid "Zoom Out"
+msgstr "Zum Keluar"
+
+#: Pinta.Core/Actions/ViewActions.cs:65
+msgid "Best Fit"
+msgstr ""
+
+#: Pinta.Core/Actions/ViewActions.cs:66
+msgid "Zoom to Selection"
+msgstr "Zum ke Pilihan"
+
+#: Pinta.Core/Actions/ViewActions.cs:67
+msgid "Normal Size"
+msgstr "Ukuran Normal"
+
+#: Pinta.Core/Actions/ViewActions.cs:68
+msgid "Toolbar"
+msgstr "Toolbar"
+
+#: Pinta.Core/Actions/ViewActions.cs:69
+msgid "Pixel Grid"
+msgstr "Kisi Piksel"
+
+#: Pinta.Core/Actions/ViewActions.cs:70
+msgid "Rulers"
+msgstr "Mistar"
+
+#: Pinta.Core/Actions/ViewActions.cs:71
+msgid "Pixels"
+msgstr "Piksel"
+
+#: Pinta.Core/Actions/ViewActions.cs:72
+msgid "Inches"
+msgstr "Inci"
+
+#: Pinta.Core/Actions/ViewActions.cs:73
+msgid "Centimeters"
+msgstr "Sentimeter"
+
+#: Pinta.Core/Actions/ViewActions.cs:74
+msgid "Fullscreen"
+msgstr "Layar Penuh"
+
+#: Pinta.Core/Actions/ViewActions.cs:114
+msgid "Ruler Units"
+msgstr ""
+
+#: Pinta.Core/Actions/ViewActions.cs:194
+#: Pinta.Core/Classes/DocumentWorkspace.cs:226
+#: Pinta.Core/Classes/DocumentWorkspace.cs:234
+msgid "Window"
+msgstr "Jendela"
+
+#: Pinta.Core/Actions/EditActions.cs:65
+msgid "Undo"
+msgstr "Urungkan"
+
+#: Pinta.Core/Actions/EditActions.cs:66
+msgid "Redo"
+msgstr "Ulangi"
+
+#: Pinta.Core/Actions/EditActions.cs:67 Pinta.Core/Actions/EditActions.cs:210
+msgid "Cut"
+msgstr "Potong"
+
+#: Pinta.Core/Actions/EditActions.cs:68
+msgid "Copy"
+msgstr "Salin"
+
+#: Pinta.Core/Actions/EditActions.cs:71
+msgid "Paste Into New Image"
+msgstr "Tempel Ke Citra Baru"
+
+#: Pinta.Core/Actions/EditActions.cs:72
+msgid "Delete Selection"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:172
+msgid "Fill Selection"
+msgstr "Arsir Pilihan"
+
+#: Pinta.Core/Actions/EditActions.cs:74
+msgid "Invert Selection"
+msgstr "Inversikan Pilihan"
+
+#: Pinta.Core/Actions/EditActions.cs:75 Pinta.Core/Actions/EditActions.cs:181
+msgid "Select All"
+msgstr "Pilih Semua"
+
+#: Pinta.Core/Actions/EditActions.cs:76
+msgid "Deselect All"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:80
+msgid "Reset to Default"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:81
+msgid "Set Number of Colors"
+msgstr "Tentukan Jumlah Warna"
+
+#: Pinta.Core/Actions/EditActions.cs:212
+msgid "Erase Selection"
+msgstr "Hapus Pilihan"
+
+#: Pinta.Core/Actions/EditActions.cs:221
+msgid "Deselect"
+msgstr "Awapilih"
+
+#: Pinta.Core/Actions/EditActions.cs:319
+msgid "Open Palette File"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:326
+msgid "Palette files (*.txt, *.gpl)"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:346
+#, csharp-format
+msgid ""
+"Could not open palette file: {0}.\n"
+"Please verify that you are trying to open a valid GIMP or Paint.NET palette."
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:359
+msgid "Save Palette File"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:365
+msgid "Paint.NET palette (*.txt)"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:370
+msgid "GIMP palette (*.gpl)"
+msgstr ""
+
+#: Pinta.Core/Classes/Document.cs:298
+msgid "Layer"
+msgstr "Lapisan"
+
+#: Pinta.Core/Classes/Document.cs:371
+msgid "copy"
+msgstr "salin"
+
+#: Pinta.Core/Classes/BaseTool.cs:151
+msgid "Tool"
+msgstr "Alat"
+
+#: Pinta.Core/Classes/BaseTool.cs:218
+msgid "Shortcut key"
+msgstr "Kunci pintasan"
+
+#: Pinta.Core/Classes/BaseTool.cs:241
+msgid "Normal Blending"
+msgstr ""
+
+#: Pinta.Core/Classes/BaseTool.cs:242
+msgid "Overwrite"
+msgstr "Timpa"
+
+#: Pinta.Core/Classes/BaseTool.cs:256
+msgid "Antialiasing On"
+msgstr ""
+
+#: Pinta.Core/Classes/BaseTool.cs:257
+msgid "Antialiasing Off"
+msgstr ""
+
+#: Pinta.Core/ImageFormats/FormatDescriptor.cs:67
+#, csharp-format
+msgid "{0} image ({1})"
+msgstr "{0} citra ({1})"
+
+#: Pinta.Core/Effects/BaseEffect.cs:42
+msgid "General"
+msgstr "Umum"
+
+#: BulgeEffect dialog
+#: FrostedGlassEffect dialog
+#: PolarInversionEffect dialog
+#: TwistEffect dialog
+#: SharpenData dialog
+#: MotionBlurEffect dialog
+msgid "Amount"
+msgstr "Sebanyak"
+
+#: RadialBlurEffect dialog
+#: JuliaFractalEffect dialog
+#: MandelbrotFractalEffect dialog
+#: EdgeDetectData dialog
+#: EmbossEffect dialog
+#: ReliefData dialog
+#: TwistEffect dialog
+msgid "Angle"
+msgstr "Sudut"
+
+#: CloudsEffect dialog
+msgid "Antialias"
+msgstr "Antialias"
+
+#: GlowEffect dialog
+msgid "Blend Mode"
+msgstr "Modus Pencampuran"
+
+#: OilPaintingEffect dialog
+msgid "Brightness"
+msgstr "Kecerahan"
+
+#: PixelateData dialog
+msgid "Brush Size"
+msgstr "Ukuran Kuas"
+
+#: PolarInversionEffect dialog
+msgid "Cell Size"
+msgstr "Ukuran Sel"
+
+#: MotionBlurEffect dialog
+msgid "Center Offset"
+msgstr "Ofset Tengah"
+
+#: OilPaintingEffect dialog
+msgid "Centered"
+msgstr "Ditengahkan"
+
+#: PencilSketchEffect dialog
+msgid "Coarseness"
+msgstr "Kekasaran"
+
+#: AddNoiseEffect dialog
+msgid "Color Range"
+msgstr "Kisaran Warna"
+
+#: InkSketchEffect dialog
+msgid "Color Saturation"
+msgstr "Kepekatan Warna"
+
+#: GlowEffect dialog
+msgid "Coloring"
+msgstr "Pewarnaan"
+
+#: AddNoiseEffect dialog
+msgid "Contrast"
+msgstr "Kontras"
+
+#: FragmentEffect dialog
+msgid "Coverage"
+msgstr "Cakupan"
+
+#: MotionBlurEffect dialog
+#: PolarInversionEffect dialog
+msgid "Distance"
+msgstr "Jarak"
+
+#: JuliaFractalEffect dialog
+msgid "Edge Behavior"
+msgstr "Sifat Tepian"
+
+#: MandelbrotFractalEffect dialog
+#: FragmentEffect dialog
+msgid "Factor"
+msgstr "Faktor"
+
+#: InkSketchEffect dialog
+msgid "Fragments"
+msgstr "Fragmen"
+
+#: TileEffect dialog
+msgid "Ink Outline"
+msgstr "Garis Tepi Tinta"
+
+#: AddNoiseEffect dialog
+#: OutlineEffect dialog
+#: MandelbrotFractalEffect dialog
+msgid "Intensity"
+msgstr "Intensitas"
+
+#: RadialBlurEffect dialog
+msgid "Lighting"
+msgstr "Pencahayaan"
+
+#: ZoomBlurEffect dialog
+#: BulgeEffect dialog
+#: PencilSketchEffect dialog
+msgid "Offset"
+msgstr "Ofset"
+
+#: MedianEffect dialog
+msgid "Pencil Tip Size"
+msgstr "Ukuran Ujung Pensil"
+
+#: CloudsEffect dialog
+msgid "Percentile"
+msgstr "Persentil"
+
+#: RadialBlurEffect dialog
+msgid "Power"
+msgstr "Daya"
+
+#: PolarInversionEffect dialog
+#: JuliaFractalEffect dialog
+#: MandelbrotFractalEffect dialog
+#: GaussianBlurEffect dialog
+msgid "Quality"
+msgstr "Mutu"
+
+#: TileEffect dialog
+#: RedEyeRemoveData dialog
+msgid "Rotation"
+msgstr "Putaran"
+
+#: CloudsEffect dialog
+msgid "Saturation percentage"
+msgstr "Persentasi kepekatan"
+
+#: CloudsEffect dialog
+msgid "Scale"
+msgstr "Skala"
+
+#: SoftenPortraitData dialog
+msgid "Seed"
+msgstr "Umpan"
+
+#: ReduceNoiseEffect dialog
+msgid "Softness"
+msgstr "Kehalusan"
+
+#: OutlineEffect dialog
+msgid "Strength"
+msgstr "Kekuatan"
+
+#: TileEffect dialog
+msgid "Thickness"
+msgstr "Ketebalan"
+
+#: RedEyeRemoveData dialog
+msgid "Tile Size"
+msgstr "Ukuran Ubin"
+
+#: JuliaFractalEffect dialog
+msgid "Warmth"
+msgstr "Kehangatan"
+
+#: RadialBlurEffect dialog
+msgid ""
+"Use low quality for previews, small images, and small angles.  Use high "
+"quality for final quality, large images, and large angles."
+msgstr ""
+"Gunakan kualitas rendah untuk pratinjau, citra kecil, dan sudut kecil. "
+"Gunakan kualitas tinggi untuk hasil akhir, citra besar, dan sudut besar."
+
+#: RedEyeRemoveEffect dialog
+msgid "Hint: For best results, first use selection tools to select each eye."
+msgstr ""
+"Saran: Demi hasil terbaik, terlebih dahulu gunakan alat pemilih untuk "
+"memilih masing-masing mata."
+
+#: pinta.desktop.in
+msgid "Pinta"
+msgstr "Pinta"
+
+#: pinta.desktop.in
+msgid "Image Editor"
+msgstr "Penyunting Gambar"
+
+#: pinta.desktop.in
+msgid "Easily create and edit images"
+msgstr "Buat dan sunting gambar dengan mudah"
+
+#: pinta.desktop.in
+msgid "Pinta Image Editor"
+msgstr "Penyunting Gambar Pinta"
+
+#: Pinta/Pads/OpenImagesPad.cs:42
+msgid "Images"
+msgstr ""
+
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
+msgid "Cannot save read only file."
+msgstr ""
+
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:208
+msgid "Image too large"
+msgstr ""
+
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:209
+msgid "ICO files can not be larger than 255 x 255 pixels."
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:252
+msgid "Image larger than canvas"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:253
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:257
+msgid "Expand canvas"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:258
+msgid "Don't change canvas size"
+msgstr ""
+
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:49
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
+msgid "Rotate / Zoom Layer"
+msgstr ""
+
+#: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:214
+msgid "Layer Shown"
+msgstr ""
+
+#: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:214
+msgid "Layer Hidden"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:21
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:50
+#: Pinta.Core/Actions/EditActions.cs:85
+msgid "Add-in Manager"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:123
+msgid ""
+"Multiple selection:\n"
+"\n"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:160
+msgid "Enable"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:163
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:270
+msgid "Disable"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:178
+msgid "No selection"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
+msgid "Available in repository:"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
+msgid "Update available"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
+msgid "This add-in can't be loaded due to missing dependencies"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
+#, csharp-format
+msgid "Required: {0} v{1}, found v{2}"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:272
+#, csharp-format
+msgid "Missing: {0} v{1}"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:286
+msgid "Installed version"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
+msgid "Repository version"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
+msgid "Download size"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
+msgid "The following depedencies required by this add-in are not available:"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
+msgid "Installation cancelled"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:159
+msgid "Some of the required add-ins were not found"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:171
+msgid "Installation failed"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:115
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:250
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:122
+msgid "Installed"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:123
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:247
+msgid "Updates"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:131
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:347
+msgid "Gallery"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:261
+msgid "All repositories"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:268
+msgid "Manage Repositories..."
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
+#, csharp-format
+msgid "{0} update available"
+msgid_plural "{0} updates available"
+msgstr[0] ""
+msgstr[1] ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
+msgid "Updating repository"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:513
+msgid "Install Add-in Package"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:523
+msgid "Add-in packages"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:102
+msgid "No add-ins found"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:120
+msgid "Add-in"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:213
+msgid "Other"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:77
+msgid "Uninstall"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:82
+msgid "The following packages will be uninstalled:"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:89
+msgid ""
+"There are other add-ins that depend on the previous ones which will also be "
+"uninstalled:"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
+msgid ""
+"The selected add-ins can't be installed because there are dependency "
+"conflicts."
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
+msgid "The following packages will be installed:"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
+msgid " (in user directory)"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
+msgid "The following packages need to be uninstalled:"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:156
+msgid "The following dependencies could not be resolved:"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
+msgid "Are you sure you want to cancel the installation?"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
+msgid "Installing Add-ins"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:211
+msgid "The installation failed!"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:212
+msgid "The installation has completed with warnings."
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
+msgid "Uninstalling Add-ins"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:216
+msgid "The uninstallation failed!"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:217
+msgid "The uninstallation has completed with warnings."
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
+msgid "Registering repository"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
+#: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
+#, csharp-format
+msgid "Exception occurred: {0}"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:181
+msgid "More information"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:229
+msgid "Install..."
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:255
+msgid "Update"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:281
+msgid "_Uninstall..."
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
+msgid "Additional extensions are required to perform this operation."
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
+msgid "The following add-ins will be installed:"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
+msgid "No updates found"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:166
+msgid "Refresh"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:194
+msgid "Update All"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
+msgid "Repository:"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
+msgid "Install from file..."
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
+msgid "Details"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
+msgid "Install"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
+msgid "Add-in Repository Management"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
+msgid "Add New Repository"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
+msgid "Select the location of the repository you want to register:"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
+msgid "Register an on-line repository"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
+msgid "Url:"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
+msgid "Register a local repository"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
+msgid "Path:"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:154
+msgid "Browse..."
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:21
+msgid "Progress"
+msgstr ""
+
+#: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
+#, csharp-format
+msgid "(provided by {0})"
+msgstr ""

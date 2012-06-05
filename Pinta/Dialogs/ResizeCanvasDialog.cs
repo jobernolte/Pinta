@@ -40,14 +40,14 @@ namespace Pinta
 			
 			Icon = PintaCore.Resources.GetIcon ("Menu.Image.CanvasSize.png");
 			
-			widthSpinner.Value = PintaCore.Workspace.ImageSize.X;
-			heightSpinner.Value = PintaCore.Workspace.ImageSize.Y;
-			
+			widthSpinner.Value = PintaCore.Workspace.ImageSize.Width;
+			heightSpinner.Value = PintaCore.Workspace.ImageSize.Height;
+
 			percentageRadio.Toggled += new EventHandler (percentageRadio_Toggled);
 			absoluteRadio.Toggled += new EventHandler (absoluteRadio_Toggled);
 			
 			percentageSpinner.ValueChanged += new EventHandler (percentageSpinner_ValueChanged);
-			
+
 			widthSpinner.ValueChanged += new EventHandler (widthSpinner_ValueChanged);
 			heightSpinner.ValueChanged += new EventHandler (heightSpinner_ValueChanged);
 			
@@ -62,6 +62,12 @@ namespace Pinta
 			SEButton.Clicked += HandleSEButtonClicked;
 			
 			SetAnchor (Anchor.Center);
+			AlternativeButtonOrder = new int[] { (int) Gtk.ResponseType.Ok, (int) Gtk.ResponseType.Cancel };
+			DefaultResponse = Gtk.ResponseType.Ok;
+
+			widthSpinner.ActivatesDefault = true;
+			heightSpinner.ActivatesDefault = true;
+			percentageSpinner.ActivatesDefault = true;
 		}
 
 		#region Public Methods
@@ -79,7 +85,7 @@ namespace Pinta
 			
 			if (aspectCheckbox.Active) {
 				value_changing = true;
-				widthSpinner.Value = (int)((heightSpinner.Value * PintaCore.Workspace.ImageSize.X) / PintaCore.Workspace.ImageSize.Y);
+				widthSpinner.Value = (int)((heightSpinner.Value * PintaCore.Workspace.ImageSize.Width) / PintaCore.Workspace.ImageSize.Height);
 				value_changing = false;
 			}
 		}
@@ -91,15 +97,15 @@ namespace Pinta
 			
 			if (aspectCheckbox.Active) {
 				value_changing = true;
-				heightSpinner.Value = (int)((widthSpinner.Value * PintaCore.Workspace.ImageSize.Y) / PintaCore.Workspace.ImageSize.X);
+				heightSpinner.Value = (int)((widthSpinner.Value * PintaCore.Workspace.ImageSize.Height) / PintaCore.Workspace.ImageSize.Width);
 				value_changing = false;
 			}
 		}
 
 		private void percentageSpinner_ValueChanged (object sender, EventArgs e)
 		{
-			widthSpinner.Value = (int)(PintaCore.Workspace.ImageSize.X * (percentageSpinner.ValueAsInt / 100f));
-			heightSpinner.Value = (int)(PintaCore.Workspace.ImageSize.Y * (percentageSpinner.ValueAsInt / 100f));
+			widthSpinner.Value = (int)(PintaCore.Workspace.ImageSize.Width * (percentageSpinner.ValueAsInt / 100f));
+			heightSpinner.Value = (int)(PintaCore.Workspace.ImageSize.Height * (percentageSpinner.ValueAsInt / 100f));
 		}
 
 		private void absoluteRadio_Toggled (object sender, EventArgs e)

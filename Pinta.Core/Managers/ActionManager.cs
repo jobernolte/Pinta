@@ -31,7 +31,7 @@ namespace Pinta.Core
 {
 	public class ActionManager
 	{
-		public AccelGroup AccelGroup { get; set; }
+		public AccelGroup AccelGroup { get; private set; }
 		
 		public FileActions File { get; private set; }
 		public EditActions Edit { get; private set; }
@@ -39,16 +39,22 @@ namespace Pinta.Core
 		public ImageActions Image { get; private set; }
 		public LayerActions Layers { get; private set; }
 		public AdjustmentsActions Adjustments { get; private set; }
+		public EffectsActions Effects { get; private set; }
+		public WindowActions Window { get; private set; }
 		public HelpActions Help { get; private set; }
 		
 		public ActionManager ()
 		{
+			AccelGroup = new AccelGroup ();
+			
 			File = new FileActions ();
 			Edit = new EditActions ();
 			View = new ViewActions ();
 			Image = new ImageActions ();
 			Layers = new LayerActions ();
 			Adjustments = new AdjustmentsActions ();
+			Effects = new EffectsActions ();
+			Window = new WindowActions ();
 			Help = new HelpActions ();
 		}
 		
@@ -56,10 +62,12 @@ namespace Pinta.Core
 		{
 			// File menu
 			ImageMenuItem file = (ImageMenuItem)menu.Children[0];
+			file.Submenu = new Menu ();
 			File.CreateMainMenu ((Menu)file.Submenu);
 			
 			//Edit menu
 			ImageMenuItem edit = (ImageMenuItem)menu.Children[1];
+			edit.Submenu = new Menu ();
 			Edit.CreateMainMenu ((Menu)edit.Submenu);
 			
 			// View menu
@@ -68,18 +76,32 @@ namespace Pinta.Core
 			
 			// Image menu
 			ImageMenuItem image = (ImageMenuItem)menu.Children[3];
+			image.Submenu = new Menu ();
 			Image.CreateMainMenu ((Menu)image.Submenu);
 			
 			//Layers menu
 			ImageMenuItem layer = (ImageMenuItem)menu.Children[4];
+			layer.Submenu = new Menu ();
 			Layers.CreateMainMenu ((Menu)layer.Submenu);
 			
 			//Adjustments menu
 			ImageMenuItem adj = (ImageMenuItem)menu.Children[5];
+			adj.Submenu = new Menu ();
 			Adjustments.CreateMainMenu ((Menu)adj.Submenu);
+
+			// Effects menu
+			ImageMenuItem eff = (ImageMenuItem)menu.Children[6];
+			eff.Submenu = new Menu ();
+			Effects.CreateMainMenu ((Menu)eff.Submenu);
+
+			// Window menu
+			ImageMenuItem window = (ImageMenuItem)menu.Children[7];
+			window.Submenu = new Menu ();
+			Window.CreateMainMenu ((Menu)window.Submenu);
 			
 			//Help menu
 			ImageMenuItem help = (ImageMenuItem)menu.Children[8];
+			help.Submenu = new Menu ();
 			Help.CreateMainMenu ((Menu)help.Submenu);
 		}
 		
@@ -90,15 +112,40 @@ namespace Pinta.Core
 			toolbar.AppendItem (File.Save.CreateToolBarItem ());
 			//toolbar.AppendItem (File.Print.CreateToolBarItem ());
 			toolbar.AppendItem (new SeparatorToolItem ());
-			toolbar.AppendItem (Edit.Cut.CreateToolBarItem ());
-			toolbar.AppendItem (Edit.Copy.CreateToolBarItem ());
-			toolbar.AppendItem (Edit.Paste.CreateToolBarItem ());
+
+			// Cut/Copy/Paste comes before Undo/Redo on Windows
+			if (PintaCore.System.OperatingSystem == OS.Windows) {
+				toolbar.AppendItem (Edit.Cut.CreateToolBarItem ());
+				toolbar.AppendItem (Edit.Copy.CreateToolBarItem ());
+				toolbar.AppendItem (Edit.Paste.CreateToolBarItem ());
+				toolbar.AppendItem (new SeparatorToolItem ());
+				toolbar.AppendItem (Edit.Undo.CreateToolBarItem ());
+				toolbar.AppendItem (Edit.Redo.CreateToolBarItem ());
+			} else {
+				toolbar.AppendItem (Edit.Undo.CreateToolBarItem ());
+				toolbar.AppendItem (Edit.Redo.CreateToolBarItem ());
+				toolbar.AppendItem (new SeparatorToolItem ());
+				toolbar.AppendItem (Edit.Cut.CreateToolBarItem ());
+				toolbar.AppendItem (Edit.Copy.CreateToolBarItem ());
+				toolbar.AppendItem (Edit.Paste.CreateToolBarItem ());
+			}
+
+			toolbar.AppendItem (new SeparatorToolItem ());
 			toolbar.AppendItem (Image.CropToSelection.CreateToolBarItem ());
 			toolbar.AppendItem (Edit.Deselect.CreateToolBarItem ());
-			toolbar.AppendItem (new SeparatorToolItem ());
-			toolbar.AppendItem (Edit.Undo.CreateToolBarItem ());
-			toolbar.AppendItem (Edit.Redo.CreateToolBarItem ());
 			View.CreateToolBar (toolbar);
+
+			toolbar.AppendItem (new SeparatorToolItem ());
+			toolbar.AppendItem (new ToolBarImage ("StatusBar.CursorXY.png"));
+
+			ToolBarLabel cursor = new ToolBarLabel ("  0, 0");
+
+			toolbar.AppendItem (cursor);
+
+			PintaCore.Chrome.LastCanvasCursorPointChanged += delegate {
+				Gdk.Point pt = PintaCore.Chrome.LastCanvasCursorPoint;
+				cursor.Text = string.Format ("  {0}, {1}", pt.X, pt.Y);
+			};
 		}
 		
 		public void RegisterHandlers ()
@@ -108,7 +155,6 @@ namespace Pinta.Core
 			Image.RegisterHandlers ();
 			Layers.RegisterHandlers ();
 			View.RegisterHandlers ();
-			Adjustments.RegisterHandlers ();
 			Help.RegisterHandlers ();
 		}
 	}

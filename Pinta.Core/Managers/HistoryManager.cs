@@ -1,8 +1,9 @@
 // 
 // HistoryManager.cs
 //  
-// Author:
+// Authors:
 //       Jonathan Pobst <monkey@jpobst.com>
+//       Joe Hillenbrand <joehillen@gmail.com>
 // 
 // Copyright (c) 2010 Jonathan Pobst
 // 
@@ -28,112 +29,70 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Gtk;
 
 namespace Pinta.Core
 {
 	public class HistoryManager
 	{
-		List<BaseHistoryItem> items = new List<BaseHistoryItem> ();
-		int stack_pointer = -1;
+		public Gtk.ListStore ListStore {
+			get { return PintaCore.Workspace.ActiveWorkspace.History.ListStore; }
+		}
 		
-		public void PushNewItem (BaseHistoryItem item)
+		public int Pointer {
+			get { return PintaCore.Workspace.ActiveWorkspace.History.Pointer; }
+		}
+		
+		public BaseHistoryItem Current {
+			get { return PintaCore.Workspace.ActiveWorkspace.History.Current; }
+		}
+		
+		public void PushNewItem (BaseHistoryItem newItem)
 		{
-			// If we have un-did items on the stack, they
-			// all get destroyed before we add a new item
-			while (items.Count - 1 > stack_pointer) {
-				BaseHistoryItem bhi = items[items.Count - 1];
-				items.RemoveAt (items.Count - 1);
-				bhi.Dispose ();
-
-				PintaCore.Actions.Edit.Redo.Sensitive = false;
-				// TODO: Delete from ListStore
-			}
-			
-			items.Add (item);
-			stack_pointer++;
-
-			PintaCore.Workspace.IsDirty = true;
-			PintaCore.Actions.Edit.Undo.Sensitive = true;
-			
-			OnHistoryItemAdded (item);
+			PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (newItem);
 		}
 		
 		public void Undo ()
 		{
-			if (stack_pointer < 0)
-				throw new InvalidOperationException ("Undo stack is empty");
-			
-			BaseHistoryItem item = items[stack_pointer--];
-			item.Undo ();
-			
-			if (stack_pointer == -1)
-				PintaCore.Actions.Edit.Undo.Sensitive = false;
-			
-			PintaCore.Actions.Edit.Redo.Sensitive = true;
-			OnActionUndone ();
-			OnHistoryItemRemoved (item);
+			PintaCore.Workspace.ActiveWorkspace.History.Undo ();
 		}
 		
 		public void Redo ()
 		{
-			if (stack_pointer == items.Count - 1)
-				throw new InvalidOperationException ("Redo stack is empty");
-
-			BaseHistoryItem item = items[++stack_pointer];
-			item.Redo ();
-
-			if (stack_pointer == items.Count - 1)
-				PintaCore.Actions.Edit.Redo.Sensitive = false;
-
-			PintaCore.Actions.Edit.Undo.Sensitive = true;
-			OnActionUndone ();
-			OnHistoryItemAdded (item);
+			PintaCore.Workspace.ActiveWorkspace.History.Redo ();
 		}
 		
 		public void Clear ()
 		{
-			while (items.Count > 0) {
-				BaseHistoryItem bhi = items[items.Count - 1];
-				items.RemoveAt (items.Count - 1);
-				bhi.Dispose ();
-
-				// TODO: Delete from ListStore
-			}
-			
-			stack_pointer = -1;
-			
-			PintaCore.Actions.Edit.Redo.Sensitive = false;
-			PintaCore.Actions.Edit.Undo.Sensitive = false;
+			PintaCore.Workspace.ActiveWorkspace.History.Clear ();
 		}
-
+		
 		#region Protected Methods
-		protected void OnHistoryItemAdded (BaseHistoryItem item)
+		protected internal void OnHistoryItemAdded (BaseHistoryItem item)
 		{
 			if (HistoryItemAdded != null)
 				HistoryItemAdded (this, new HistoryItemAddedEventArgs (item));
 		}
-		
-		protected void OnHistoryItemRemoved (BaseHistoryItem item)
+
+		protected internal void OnHistoryItemRemoved (BaseHistoryItem item)
 		{
 			if (HistoryItemRemoved != null)
-			{
 				HistoryItemRemoved (this, new HistoryItemRemovedEventArgs (item));
-			}
 		}
 
-		protected void OnActionUndone ()
+		protected internal void OnActionUndone ()
 		{
 			if (ActionUndone != null)
 				ActionUndone (this, EventArgs.Empty);
 		}
 
-		protected void OnActionRedone ()
+		protected internal void OnActionRedone ()
 		{
 			if (ActionRedone != null)
 				ActionRedone (this, EventArgs.Empty);
 		}
 		#endregion
-
+		 
 		#region Events
 		public event EventHandler<HistoryItemAddedEventArgs> HistoryItemAdded;
 		public event EventHandler<HistoryItemRemovedEventArgs> HistoryItemRemoved;

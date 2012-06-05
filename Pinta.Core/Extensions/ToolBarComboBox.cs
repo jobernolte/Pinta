@@ -1,4 +1,4 @@
-// 
+//
 // ToolBarComboBox.cs
 //  
 // Author:
@@ -32,14 +32,23 @@ namespace Pinta.Core
 	public class ToolBarComboBox : ToolItem
 	{
 		public ComboBox ComboBox { get; private set; }
-		
+		public ListStore Model { get; private set; }
+
 		public ToolBarComboBox (int width, int activeIndex, bool allowEntry, params string[] contents)
 		{
 			if (allowEntry)
 				ComboBox = new ComboBoxEntry (contents);
-			else
-				ComboBox = new ComboBox (contents);
-			
+			else {
+				Model = new ListStore (typeof(string), typeof (object));
+
+				if (contents != null)
+					foreach (string entry in contents)
+						Model.AppendValues (entry, null);
+
+				ComboBox = CreateComboBox ();
+				ComboBox.Model = Model;
+			}
+
 			ComboBox.AddEvents ((int)Gdk.EventMask.ButtonPressMask);
 			ComboBox.WidthRequest = width;
 			
@@ -50,6 +59,11 @@ namespace Pinta.Core
 			
 			Add (ComboBox);
 			Show ();
+		}
+
+		protected virtual ComboBox CreateComboBox ()
+		{
+			return ComboBox.NewText ();
 		}
 	}
 }

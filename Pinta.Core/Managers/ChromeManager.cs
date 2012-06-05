@@ -34,23 +34,82 @@ namespace Pinta.Core
 		private Toolbar tool_toolbar;
 		private DrawingArea drawing_area;
 		private Window main_window;
-		
+		private IProgressDialog progress_dialog;
+		private bool main_window_busy;
+		private Gdk.Point last_canvas_cursor_point;
+		private MenuBar main_menu;
+		private Toolbar main_toolbar;
+
 		public Toolbar ToolToolBar { get { return tool_toolbar; } }
-		public DrawingArea DrawingArea { get { return drawing_area; } }
+		public Toolbar MainToolBar { get { return main_toolbar; } }
+		public DrawingArea Canvas { get { return drawing_area; } }
 		public Window MainWindow { get { return main_window; } }
+		public IProgressDialog ProgressDialog { get { return progress_dialog; } }
+		public MenuBar MainMenu { get { return main_menu; } }
 		
 		public ChromeManager ()
 		{
 		}
 		
-		public void Initialize (Toolbar toolToolBar, Label statusBarText, DrawingArea drawingArea, TreeView historyStack, Window mainWindow)
-		{
-			tool_toolbar = toolToolBar;
-			drawing_area = drawingArea;
-			main_window = mainWindow;
+		#region Public Properties
+		public Gdk.Point LastCanvasCursorPoint {
+			get { return last_canvas_cursor_point; }
+			set {
+				if (last_canvas_cursor_point != value) {
+					last_canvas_cursor_point = value;
+					OnLastCanvasCursorPointChanged ();				
+				}
+			}
 		}
+		
+		public bool MainWindowBusy {
+			get { return main_window_busy; }
+			set {
+				main_window_busy = value;
+				
+				if (main_window_busy)
+					main_window.GdkWindow.Cursor = new Gdk.Cursor(Gdk.CursorType.Watch);
+				else
+					main_window.GdkWindow.Cursor = PintaCore.Tools.CurrentTool.DefaultCursor;
+			}
+		}
+		#endregion
 
 		#region Public Methods
+		public void InitializeToolToolBar (Toolbar toolToolBar)
+		{
+			tool_toolbar = toolToolBar;
+		}
+
+		public void InitializeMainToolBar (Toolbar mainToolBar)
+		{
+			main_toolbar = mainToolBar;
+		}
+
+		public void InitializeCanvas (DrawingArea canvas)
+		{
+			drawing_area = canvas;
+		}
+
+		public void InitializeWindowShell (Window shell)
+		{
+			main_window = shell;
+		}
+
+		public void InitializeMainMenu (MenuBar menu)
+		{
+			main_menu = menu;
+		}
+
+		public void InitializeProgessDialog (IProgressDialog progressDialog)
+		{
+			if (progressDialog == null)
+				throw new ArgumentNullException ("progressDialog");
+
+			progress_dialog = progressDialog;
+		}
+
+
 		public void SetStatusBarText (string text)
 		{
 			OnStatusBarTextChanged (text);
@@ -58,6 +117,12 @@ namespace Pinta.Core
 		#endregion
 
 		#region Protected Methods
+		protected void OnLastCanvasCursorPointChanged ()
+		{
+			if (LastCanvasCursorPointChanged != null)
+				LastCanvasCursorPointChanged (this, EventArgs.Empty);
+		}
+
 		protected void OnStatusBarTextChanged (string text)
 		{
 			if (StatusBarTextChanged != null)
@@ -66,7 +131,18 @@ namespace Pinta.Core
 		#endregion
 		
 		#region Public Events
+		public event EventHandler LastCanvasCursorPointChanged;
 		public event EventHandler<TextChangedEventArgs> StatusBarTextChanged;
 		#endregion
+	}
+		
+	public interface IProgressDialog
+	{
+		void Show ();
+		void Hide ();
+		string Title { get; set; }
+		string Text { get; set; }
+		double Progress { get; set; }
+		event EventHandler<EventArgs> Canceled;
 	}
 }

@@ -25,12 +25,14 @@
 // THE SOFTWARE.
 
 using System;
+using Mono.Unix;
 
 namespace Pinta.Core
 {
 	public class ImageActions
 	{
 		public Gtk.Action CropToSelection { get; private set; }
+		public Gtk.Action AutoCrop { get; private set; }
 		public Gtk.Action Resize { get; private set; }
 		public Gtk.Action CanvasSize { get; private set; }
 		public Gtk.Action FlipHorizontal { get; private set; }
@@ -54,15 +56,16 @@ namespace Pinta.Core
 			fact.Add ("Menu.Image.Rotate90CW.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Rotate90CW.png")));
 			fact.AddDefault ();
 			
-			CropToSelection = new Gtk.Action ("CropToSelection", Mono.Unix.Catalog.GetString ("Crop to Selection"), null, "Menu.Image.Crop.png");
-			Resize = new Gtk.Action ("Resize", Mono.Unix.Catalog.GetString ("Resize..."), null, "Menu.Image.Resize.png");
-			CanvasSize = new Gtk.Action ("CanvasSize", Mono.Unix.Catalog.GetString ("Canvas Size..."), null, "Menu.Image.CanvasSize.png");
-			FlipHorizontal = new Gtk.Action ("FlipHorizontal", Mono.Unix.Catalog.GetString ("Flip Horizontal"), null, "Menu.Image.FlipHorizontal.png");
-			FlipVertical = new Gtk.Action ("FlipVertical", Mono.Unix.Catalog.GetString ("Flip Vertical"), null, "Menu.Image.FlipVertical.png");
-			RotateCW = new Gtk.Action ("RotateCW", Mono.Unix.Catalog.GetString ("Rotate 90° Clockwise"), null, "Menu.Image.Rotate90CW.png");
-			RotateCCW = new Gtk.Action ("RotateCCW", Mono.Unix.Catalog.GetString ("Rotate 90° Counter-Clockwise"), null, "Menu.Image.Rotate90CCW.png");
-			Rotate180 = new Gtk.Action ("Rotate180", Mono.Unix.Catalog.GetString ("Rotate 180°"), null, "Menu.Image.Rotate180CW.png");
-			Flatten = new Gtk.Action ("Flatten", Mono.Unix.Catalog.GetString ("Flatten"), null, "Menu.Image.Flatten.png");
+			CropToSelection = new Gtk.Action ("CropToSelection", Catalog.GetString ("Crop to Selection"), null, "Menu.Image.Crop.png");
+			AutoCrop = new Gtk.Action ("AutoCrop", Catalog.GetString ("Auto Crop"), null, "Menu.Image.Crop.png");
+			Resize = new Gtk.Action ("Resize", Catalog.GetString ("Resize Image..."), null, "Menu.Image.Resize.png");
+			CanvasSize = new Gtk.Action ("CanvasSize", Catalog.GetString ("Resize Canvas..."), null, "Menu.Image.CanvasSize.png");
+			FlipHorizontal = new Gtk.Action ("FlipHorizontal", Catalog.GetString ("Flip Horizontal"), null, "Menu.Image.FlipHorizontal.png");
+			FlipVertical = new Gtk.Action ("FlipVertical", Catalog.GetString ("Flip Vertical"), null, "Menu.Image.FlipVertical.png");
+			RotateCW = new Gtk.Action ("RotateCW", Catalog.GetString ("Rotate 90° Clockwise"), null, "Menu.Image.Rotate90CW.png");
+			RotateCCW = new Gtk.Action ("RotateCCW", Catalog.GetString ("Rotate 90° Counter-Clockwise"), null, "Menu.Image.Rotate90CCW.png");
+			Rotate180 = new Gtk.Action ("Rotate180", Catalog.GetString ("Rotate 180°"), null, "Menu.Image.Rotate180CW.png");
+			Flatten = new Gtk.Action ("Flatten", Catalog.GetString ("Flatten"), null, "Menu.Image.Flatten.png");
 			
 			CropToSelection.Sensitive = false;
 		}
@@ -70,9 +73,8 @@ namespace Pinta.Core
 		#region Initialization
 		public void CreateMainMenu (Gtk.Menu menu)
 		{
-			menu.Remove (menu.Children[1]);
-			
 			menu.Append (CropToSelection.CreateAcceleratedMenuItem (Gdk.Key.X, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
+			menu.Append (AutoCrop.CreateAcceleratedMenuItem (Gdk.Key.X, Gdk.ModifierType.Mod1Mask | Gdk.ModifierType.ControlMask));
 			menu.Append (Resize.CreateAcceleratedMenuItem (Gdk.Key.R, Gdk.ModifierType.ControlMask));
 			menu.Append (CanvasSize.CreateAcceleratedMenuItem (Gdk.Key.R, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			menu.AppendSeparator ();
@@ -95,92 +97,205 @@ namespace Pinta.Core
 			RotateCW.Activated += HandlePintaCoreActionsImageRotateCWActivated;
 			RotateCCW.Activated += HandlePintaCoreActionsImageRotateCCWActivated;
 			CropToSelection.Activated += HandlePintaCoreActionsImageCropToSelectionActivated;
+			AutoCrop.Activated += HandlePintaCoreActionsImageAutoCropActivated;
 		}
 		#endregion
 
 		#region Action Handlers
 		private void HandlePintaCoreActionsImageRotateCCWActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			PintaCore.Layers.RotateImageCCW ();
-			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CCW));
+			PintaCore.Tools.Commit ();
+			doc.RotateImageCCW ();
+
+			doc.ResetSelectionPath ();
+
+			doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CCW));
 		}
 
 		private void HandlePintaCoreActionsImageRotateCWActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			PintaCore.Layers.RotateImageCW ();
-			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CW));
+			PintaCore.Tools.Commit ();
+			doc.RotateImageCW ();
+
+			doc.ResetSelectionPath ();
+
+			doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CW));
 		}
 
 		private void HandlePintaCoreActionsImageFlattenActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Image.Flatten.png", Mono.Unix.Catalog.GetString ("Flatten"));
-			SimpleHistoryItem h1 = new SimpleHistoryItem (string.Empty, string.Empty, PintaCore.Layers[0].Surface.Clone (), 0);
+			PintaCore.Tools.Commit ();
+
+			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Image.Flatten.png", Catalog.GetString ("Flatten"));
+			SimpleHistoryItem h1 = new SimpleHistoryItem (string.Empty, string.Empty, doc.Layers[0].Surface.Clone (), 0);
+
 			hist.Push (h1);
 
-			for (int i = 1; i < PintaCore.Layers.Count; i++)
-				hist.Push (new DeleteLayerHistoryItem (string.Empty, string.Empty, PintaCore.Layers[i], i));
+			for (int i = 1; i < doc.Layers.Count; i++)
+				hist.Push (new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.Layers[i], i));
 
-			PintaCore.Layers.FlattenImage ();
+			doc.FlattenImage ();
 
-			PintaCore.History.PushNewItem (hist);
+			doc.History.PushNewItem (hist);
 		}
 
 		private void HandlePintaCoreActionsImageRotate180Activated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			PintaCore.Layers.RotateImage180 ();
-			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate180));
+			PintaCore.Tools.Commit ();
+			doc.RotateImage180 ();
+
+			doc.ResetSelectionPath ();
+
+			doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate180));
 		}
 
 		private void HandlePintaCoreActionsImageFlipVerticalActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			PintaCore.Layers.FlipImageVertical ();
-			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.FlipVertical));
+			PintaCore.Tools.Commit ();
+			doc.FlipImageVertical ();
+
+			doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipVertical));
 		}
 
 		private void HandlePintaCoreActionsImageFlipHorizontalActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			PintaCore.Layers.FlipImageHorizontal ();
-			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.FlipHorizontal));
+			PintaCore.Tools.Commit ();
+			doc.FlipImageHorizontal ();
+
+			doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipHorizontal));
 		}
 
 		private void HandlePintaCoreActionsImageCropToSelectionActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			Cairo.Rectangle rect = PintaCore.Layers.SelectionPath.GetBounds ();
+			PintaCore.Tools.Commit ();
 
-			int width = (int)rect.Width;
-			int height = (int)rect.Height;
-			
-			ResizeHistoryItem hist = new ResizeHistoryItem (PintaCore.Workspace.ImageSize.X, PintaCore.Workspace.ImageSize.Y);
-			hist.Icon = "Menu.Image.Crop.png";
-			hist.Text = "Crop to Selection";
-			hist.TakeSnapshotOfImage ();
-			hist.RestorePath = PintaCore.Layers.SelectionPath.Clone ();
+			Gdk.Rectangle rect = doc.GetSelectedBounds (true);
 
-			PintaCore.Workspace.ImageSize = new Cairo.Point (width, height);
-			PintaCore.Workspace.CanvasSize = new Cairo.Point (width, height);
+			CropImageToRectangle (doc, rect);
+		}
 
-			foreach (var layer in PintaCore.Layers)
-				layer.Crop (rect);
+		private void HandlePintaCoreActionsImageAutoCropActivated (object sender, EventArgs e)
+		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			PintaCore.History.PushNewItem (hist);
+			PintaCore.Tools.Commit ();
 
-			PintaCore.Layers.ResetSelectionPath ();
-			PintaCore.Workspace.Invalidate ();
+			Cairo.ImageSurface image = doc.CurrentLayer.Surface;
+			Gdk.Rectangle rect = image.GetBounds ();
+
+			Cairo.Color borderColor = image.GetPixel (0, 0);
+			bool cropSide = true;
+			int depth = -1;
+
+			//From the top down
+			while (cropSide) {
+				depth++;
+				for (int i = 0; i < image.Width; i++) {
+					if (!borderColor.Equals(image.GetPixel (i, depth))) {
+						cropSide = false;
+						break;
+					}
+				}
+				//Check if the image is blank/mono-coloured, only need to do it on this scan
+				if (depth == image.Height)
+					return;
+			}
+
+			rect = new Gdk.Rectangle (rect.X, rect.Y + depth, rect.Width, rect.Height - depth);
+
+			depth = image.Height;
+			cropSide = true;
+			//From the bottom up
+			while (cropSide) {
+				depth--;
+				for (int i = 0; i < image.Width; i++) {
+					if (!borderColor.Equals(image.GetPixel (i, depth))) {
+						cropSide = false;
+						break;
+					}
+				}
+
+			}
+
+			rect = new Gdk.Rectangle (rect.X, rect.Y, rect.Width, depth - rect.Y);
+
+			depth = 0;
+			cropSide = true;
+			//From left to right
+			while (cropSide) {
+				depth++;
+				for (int i = 0; i < image.Height; i++) {
+					if (!borderColor.Equals(image.GetPixel (depth, i))) {
+						cropSide = false;
+						break;
+					}
+				}
+
+			}
+
+			rect = new Gdk.Rectangle (rect.X + depth, rect.Y, rect.Width - depth, rect.Height);
+
+			depth = image.Width;
+			cropSide = true;
+			//From right to left
+			while (cropSide) {
+				depth--;
+				for (int i = 0; i < image.Height; i++) {
+					if (!borderColor.Equals(image.GetPixel (depth, i))) {
+						cropSide = false;
+						break;
+					}
+				}
+
+			}
+
+			rect = new Gdk.Rectangle (rect.X, rect.Y, depth - rect.X, rect.Height);
+
+			CropImageToRectangle (doc, rect);
 		}
 		#endregion
+
+		static void CropImageToRectangle (Document doc, Gdk.Rectangle rect)
+		{
+			ResizeHistoryItem hist = new ResizeHistoryItem (doc.ImageSize);
+			
+			hist.Icon = "Menu.Image.Crop.png";
+			hist.Text = Catalog.GetString ("Crop to Selection");
+			hist.TakeSnapshotOfImage ();
+			hist.RestorePath = doc.SelectionPath.Clone ();
+			
+			PintaCore.Chrome.Canvas.GdkWindow.FreezeUpdates ();
+			
+			double original_scale = doc.Workspace.Scale;
+			doc.ImageSize = rect.Size;
+			doc.Workspace.CanvasSize = rect.Size;
+			doc.Workspace.Scale = original_scale;
+			
+			PintaCore.Actions.View.UpdateCanvasScale ();
+			
+			PintaCore.Chrome.Canvas.GdkWindow.ThawUpdates ();
+			
+			foreach (var layer in doc.Layers)
+				layer.Crop (rect, doc.SelectionPath);
+			
+			doc.History.PushNewItem (hist);
+			doc.ResetSelectionPath ();
+			
+			doc.Workspace.Invalidate ();
+		}
 	}
 }

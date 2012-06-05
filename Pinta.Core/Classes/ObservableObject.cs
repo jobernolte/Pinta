@@ -25,11 +25,12 @@
 // THE SOFTWARE.
 
 using System;
+using System.ComponentModel;
 
 namespace Pinta.Core
 {
 
-	public class ObservableObject
+	public abstract class ObservableObject
 	{
 		public ObservableObject ()
 		{
@@ -39,10 +40,14 @@ namespace Pinta.Core
 				
 		protected void SetValue<T> (string propertyName, ref T member, T value)
 		{
-			member = value;
-			
+			member = value;			
+			FirePropertyChanged (propertyName);
+		}
+		
+		protected void FirePropertyChanged (string propertyName)
+		{
 			if (PropertyChanged != null)
-				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-		}		
+				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));			
+		}
 	}
 }

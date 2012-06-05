@@ -26,20 +26,33 @@
 
 using System;
 using Pinta.Core;
+using Gtk;
 
 namespace Pinta
 {
 	public partial class NewImageDialog : Gtk.Dialog
 	{
-		public NewImageDialog ()
+		public NewImageDialog () : base (string.Empty, PintaCore.Chrome.MainWindow, DialogFlags.Modal)
 		{
 			this.Build ();
 
-			this.Icon = Gtk.IconTheme.Default.LoadIcon ("gtk-new", 16, Gtk.IconLookupFlags.UseBuiltin);
+			this.Icon = PintaCore.Resources.GetIcon (Stock.New, 16);
+			DefaultResponse = ResponseType.Ok;
+			AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
+
+			widthSpinner.ActivatesDefault = true;
+			heightSpinner.ActivatesDefault = true;
 		}
 
-		public int NewImageWidth { get { return this.widthSpinner.ValueAsInt; } }
-		public int NewImageHeight { get { return this.heightSpinner.ValueAsInt; } }
+		public int NewImageWidth {
+			get { return widthSpinner.ValueAsInt; }
+			set { widthSpinner.Value = value; }
+		}
+
+		public int NewImageHeight {
+			get { return heightSpinner.ValueAsInt; }
+			set { heightSpinner.Value = value; }
+		}
 	}
 }
 
