@@ -26,6 +26,12 @@
 
 using System;
 using Gtk;
+using Mono.Options;
+using System.Collections.Generic;
+using Pinta.Core;
+using Mono.Unix;
+using System.IO;
+using System.Reflection;
 
 namespace Pinta
 {
@@ -33,14 +39,95 @@ namespace Pinta
 	{
 		public static void Main (string[] args)
 		{
+			string app_dir = Path.GetDirectoryName (Assembly.GetExecutingAssembly ().Location);
+			string locale_dir;
+			bool devel_mode = File.Exists (Path.Combine (Path.Combine (app_dir, ".."), "Pinta.sln"));
+
+			if (SystemManager.GetOperatingSystem () != OS.X11 || devel_mode)
+				locale_dir = Path.Combine (app_dir, "locale");
+			else {
+				// From MonoDevelop:
+				// Pinta is located at $prefix/lib/pinta
+				// adding "../.." should give us $prefix
+				string prefix = Path.Combine (Path.Combine (app_dir, ".."), "..");
+				//normalise it
+				prefix = Path.GetFullPath (prefix);
+				//catalog is installed to "$prefix/share/locale" by default
+				locale_dir = Path.Combine (Path.Combine (prefix, "share"), "locale");
+			}
+
+			try {
+				Catalog.Init ("pinta", locale_dir);
+			} catch (Exception ex) {
+				Console.WriteLine (ex);
+			}
+
+			int threads = -1;
+
+			var p = new OptionSet () {
+				{ "rt|render-threads=", Catalog.GetString ("number of threads to use for rendering"), (int v) => threads = v }
+			};
+
+			List<string> extra;
+
+			try {
+				extra = p.Parse (args);
+			} catch (OptionException e) {
+				Console.Write ("Pinta: ");
+				Console.WriteLine (e.Message);
+				return;
+			}
+
+			GLib.ExceptionManager.UnhandledException += new GLib.UnhandledExceptionHandler (ExceptionManager_UnhandledException);
+
 			Application.Init ();
 			MainWindow win = new MainWindow ();
-			win.Show ();
-			
-			if (args.Length > 0)
-				Pinta.Core.PintaCore.Actions.File.OpenFile (args[0]);
-				
+			//win.Show ();
+
+			if (threads != -1)
+				Pinta.Core.PintaCore.System.RenderThreads = threads;
+
+			OpenFilesFromCommandLine (extra);
+
 			Application.Run ();
+		}
+
+		private static void OpenFilesFromCommandLine (List<string> extra)
+		{
+			// Ignore the process serial number parameter on Mac OS X
+			if (PintaCore.System.OperatingSystem == OS.Mac && extra.Count > 0)
+			{
+				if (extra[0].StartsWith ("-psn_"))
+				{
+					extra.RemoveAt (0);
+				}
+			}
+
+			if (extra.Count > 0)
+			{
+				foreach (var file in extra)
+					PintaCore.Workspace.OpenFile (file);
+			}
+			else
+			{
+				// Create a blank document
+				PintaCore.Workspace.NewDocument (new Gdk.Size (800, 600), false);
+			}
+		}
+
+		private static void ExceptionManager_UnhandledException (GLib.UnhandledExceptionArgs args)
+		{
+			ErrorDialog errorDialog = new ErrorDialog (null);
+
+			Exception ex = (Exception)args.ExceptionObject;
+
+			try {
+				errorDialog.Message = string.Format ("{0}:\n{1}", "Unhandled exception", ex.Message);
+				errorDialog.AddDetails (ex.ToString (), false);
+				errorDialog.Run ();
+			} finally {
+				errorDialog.Destroy ();
+			}
 		}
 	}
 }
